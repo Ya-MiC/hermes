@@ -1,7 +1,7 @@
 {
   "name": "hermes-dsh-plugins",
-  "version": "2.0.0",
-  "description": "Five DSH plugins by Hermes for Ya-MiC: repo index, turn clock, quant backtest, audit draft, IELTS coach, identity checklist",
+  "version": "2.1.0",
+  "description": "Production-grade DeepSeek Harness plugins: quant backtest, audit report drafts, IELTS coach, identity checklist",
   "author": "Ya-MiC",
   "homepage": "https://github.com/Ya-MiC/hermes/tree/dsh-plugins",
   "license": "MIT",
@@ -10,28 +10,20 @@
   },
   "plugins": [
     {
-      "id": "dsh-yamic-repo-index",
-      "entry": "./src/dsh-yamic-repo-index/index.ts"
-    },
-    {
-      "id": "dsh-turn-clock",
-      "entry": "./src/dsh-turn-clock/index.ts"
-    },
-    {
       "id": "dsh-quant-backtest",
-      "entry": "./src/dsh-quant-backtest/index.ts"
+      "entry": "./dist/plugins/quant-backtest.js"
     },
     {
       "id": "dsh-audit-draft",
-      "entry": "./src/dsh-audit-draft/index.ts"
+      "entry": "./dist/plugins/audit-draft.js"
     },
     {
       "id": "dsh-ielts-coach",
-      "entry": "./src/dsh-ielts-coach/index.ts"
+      "entry": "./dist/plugins/ielts-coach.js"
     },
     {
       "id": "dsh-identity-checklist",
-      "entry": "./src/dsh-identity-checklist/index.ts"
+      "entry": "./dist/plugins/identity-checklist.js"
     }
   ]
 }
