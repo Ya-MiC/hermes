@@ -1,83 +1,67 @@
-# Hermes — Ya-MiC 的 GitHub 全景索引
+# 🗺️ 五年主線路線圖
 
-> 收录 [Ya-MiC](https://github.com/Ya-MiC) 全部自有、Fork 与星标仓库，符合 **DSH (DeepSeek Harness)** 生态规范。
-> 全部真实数据，按主题分支组织，每个分支均有中英双语文档。
+> 本分支是整個 `hermes` 倉庫的**脊柱**——其他每個分支都是為下面某個階段服務的工具。
+> 半成品不再是散落的碎片，而是主線上待完成的節點。
 
-## 🌿 分支导航
-
-| 分支 | 主题 | 文档 |
-|---|---|---|
-| [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) | 🧩 DeepSeek Harness 插件生态 | [中文](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.md) |
-| [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) | 📈 量化交易 | [中文](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.md) |
-| [`proxy-network`](https://github.com/Ya-MiC/hermes/tree/proxy-network) | 🌐 代理、订阅、Workers | [中文](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.md) |
-| [`ai-agents`](https://github.com/Ya-MiC/hermes/tree/ai-agents) | 🤖 AI 智能体与 LLM 工具 | [中文](https://github.com/Ya-MiC/hermes/blob/ai-agents/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/ai-agents/README.md) |
-| [`docs-notes`](https://github.com/Ya-MiC/hermes/tree/docs-notes) | 📚 个人文档与笔记 | [中文](https://github.com/Ya-MiC/hermes/blob/docs-notes/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/docs-notes/README.md) |
-
-## 📊 总览
-
-| 分类 | 自有 | Fork | 星标 |
-|---|---|---|---|
-| [dsh-plugins](#dsh-plugins) | 0 | 2 | 2 |
-| [quant-trading](#quant-trading) | 0 | 4 | 9 |
-| [proxy-network](#proxy-network) | 5 | 8 | 3 |
-| [ai-agents](#ai-agents) | 5 | 2 | 8 |
-| [docs-notes](#docs-notes) | 13 | 5 | 5 |
-
-## 🧩 DSH Plugins / DSH 插件
-
-详见分支 [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) → [中文](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.zh.md) / [English](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.md)
-- [Ya-MiC/deepseek-harness](https://github.com/Ya-MiC/deepseek-harness)（Fork）★0
-- [Ya-MiC/dsh-stock-watch](https://github.com/Ya-MiC/dsh-stock-watch)（Fork）★0
-- [Awu12277/dsh-stock-watch](https://github.com/Awu12277/dsh-stock-watch)（Star）★61
-- [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)（Star）★187035
-
-## 📈 Quant Trading / 量化交易
-
-详见分支 [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) → [中文](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.zh.md) / [English](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.md)
-- [Ya-MiC/awesome-systematic-trading](https://github.com/Ya-MiC/awesome-systematic-trading)（Fork）★0
-- [Ya-MiC/FinceptTerminal](https://github.com/Ya-MiC/FinceptTerminal)（Fork）★0
-- [Ya-MiC/nautilus_trader](https://github.com/Ya-MiC/nautilus_trader)（Fork）★0
-- [Ya-MiC/trading-second-brain_needchange](https://github.com/Ya-MiC/trading-second-brain_needchange)（Fork）★0
-- [kain26/trading-second-brain](https://github.com/kain26/trading-second-brain)（Star）★41
-- ……其余 8 个见 `quant-trading` 分支
-
-## 🌐 Proxy & Network / 代理与网络
-
-详见分支 [`proxy-network`](https://github.com/Ya-MiC/hermes/tree/proxy-network) → [中文](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.zh.md) / [English](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.md)
-- [Ya-MiC/-GL.iNet-OpenWrt-DNS-](https://github.com/Ya-MiC/-GL.iNet-OpenWrt-DNS-)（Own）★0
-- [Ya-MiC/BPB-Worker-Panel](https://github.com/Ya-MiC/BPB-Worker-Panel)（Fork）★0
-- [Ya-MiC/CF-Workers-SUB](https://github.com/Ya-MiC/CF-Workers-SUB)（Fork）★0
-- [Ya-MiC/dingyuebaohu](https://github.com/Ya-MiC/dingyuebaohu)（Fork）★0
-- [Ya-MiC/fofa-](https://github.com/Ya-MiC/fofa-)（Own）★1
-- ……其余 11 个见 `proxy-network` 分支
-
-## 🤖 AI Agents / 智能体
-
-详见分支 [`ai-agents`](https://github.com/Ya-MiC/hermes/tree/ai-agents) → [中文](https://github.com/Ya-MiC/hermes/blob/ai-agents/README.zh.md) / [English](https://github.com/Ya-MiC/hermes/blob/ai-agents/README.md)
-- [Ya-MiC/economics-11.29](https://github.com/Ya-MiC/economics-11.29)（Own）★0
-- [Ya-MiC/invoice-ocr-system](https://github.com/Ya-MiC/invoice-ocr-system)（Own）★0
-- [Ya-MiC/MarkWrite](https://github.com/Ya-MiC/MarkWrite)（Fork）★0
-- [Ya-MiC/nie-grassroots-logic](https://github.com/Ya-MiC/nie-grassroots-logic)（Fork）★0
-- [Ya-MiC/openclaw-kugua-state](https://github.com/Ya-MiC/openclaw-kugua-state)（Own）★0
-- ……其余 10 个见 `ai-agents` 分支
-
-## 📚 Docs & Notes / 文档与笔记
-
-详见分支 [`docs-notes`](https://github.com/Ya-MiC/hermes/tree/docs-notes) → [中文](https://github.com/Ya-MiC/hermes/blob/docs-notes/README.zh.md) / [English](https://github.com/Ya-MiC/hermes/blob/docs-notes/README.md)
-- [Ya-MiC/-](https://github.com/Ya-MiC/-)（Own）★1
-- [Ya-MiC/123](https://github.com/Ya-MiC/123)（Own）★0
-- [Ya-MiC/basedblocks-keepalive](https://github.com/Ya-MiC/basedblocks-keepalive)（Own）★1
-- [Ya-MiC/docformat-gui](https://github.com/Ya-MiC/docformat-gui)（Fork）★0
-- [Ya-MiC/Excel-Randomization-Process](https://github.com/Ya-MiC/Excel-Randomization-Process)（Own）★0
-- ……其余 18 个见 `docs-notes` 分支
+**檔案**：2006 年 2 月生 · 商務數據分析專業大二 · 家庭會計審計背景 · 目標：量化被動收入 → agent 軟件全球出售 → 30 歲前拿國外身份。
 
 ---
 
-## 关于 DSH 规范
+## 主線一覽
 
-本仓库遵循 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 生态规范：
-- 官方标签：`deepseek-harness` `dsh` `dsh-plugin`
-- 插件格式：TypeScript 模块，导出 `name` + `apply(ctx)`（见 `dsh-plugins` 分支）
-- 每个分支双语文档（`README.md` / `README.zh.md`）
+```
+階段一 (2026-2027)      階段二 (2027-2028)       階段三 (2028-2030)      階段四 (2030+)
+能力期                  收入期                   出海期                  身份期
+技能與工具               第一筆被動收入            軟件全球出售              30歲前身份落地
+   |                       |                       |                      |
+quant-toolkit ---------> 小資金實盤   <--------> 垂直SaaS產品 --+       香港/海外
+audit-agent  ---------> 接單變現                     全球收款          銀行通道
+ielts-plan   --> 3年雅思窗口 ======================> 簽證必須
+identity-kit =======================================> 新西蘭Level7路線 ==>
+```
 
-➡ English: [README.md](./README.md)
+## 階段一 — 能力期（現在 → 2027 中）
+
+**目標**：把每個半成品做成能跑的工具。先完成，再完美。
+
+| 交付物 | 位置 | 狀態 |
+|---|---|---|
+| 量化入門工具箱（數據→信號→回測） | [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) + 本分支 `tools/` | 🔨 建設中 |
+| 審計/報告生成器（家庭行業垂直） | 本分支 `tools/audit-agent/` | 🔨 建設中 |
+| 雅思學習計劃（2028 前 ≥6.5） | `ielts-plan.md` | 📋 已起草 |
+| DSH 插件作為公開作品集 | [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) | ✅ v1.0 |
+
+## 階段二 — 收入期（2027-2028）
+
+**目標**：第一筆被動收入，金額小但必須是真錢。
+- 用小資金跑量化策略（匯豐 One + 加密通道已備好 ✅）
+- 審計/報告自動化先賣給家裡的行業人脈——溫暖市場起步
+- 用階段一的工具箱接數據分析兼職
+
+## 階段三 — 出海期（2028-2030）
+
+**目標**：軟件產品賣向全球；語言和資金為移民就緒。
+- 把審計 agent 產品化為垂直 SaaS（多語言、多司法轄區）
+- 雅思成績到手 ✅（窗口約 2029 前關閉）
+- 階段二的渠道積累資金
+
+## 階段四 — 身份期（2031 前，30 歲前） 
+
+**目標**：國外身份落地，詳見 [`identity-kit.md`](./identity-kit.md)。
+- 主路線：新西蘭 Level 7 → 工簽 → 居民（[研究文檔](https://github.com/Ya-MiC/Global-Identity-Planning)）
+- 通道已備：匯豐香港 One（銀行）、加密錢包（無國界結算）
+- 備選路線見 identity-kit
+
+---
+
+## 分支與主線的關係
+
+| 分支 | 服務於 |
+|---|---|
+| [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) | 階段一→二 收入引擎 |
+| [`ai-agents`](https://github.com/Ya-MiC/hermes/tree/ai-agents) | 階段一→三 產品引擎 |
+| [`proxy-network`](https://github.com/Ya-MiC/hermes/tree/proxy-network) | 全階段基礎設施 |
+| [`docs-notes`](https://github.com/Ya-MiC/hermes/tree/docs-notes) | 參考檔案庫 |
+| [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) | 公開作品集 / DSH 生態存在感 |
+
+⬅ 返回[總索引](https://github.com/Ya-MiC/hermes/tree/main) · English: [README.md](./README.md)
