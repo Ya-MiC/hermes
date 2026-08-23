@@ -1,0 +1,25 @@
+{
+  "name": "hermes-dsh-plugins",
+  "version": "1.0.0",
+  "description": "DSH plugins by Hermes for Ya-MiC — repo index shortcut, turn clock, quant links",
+  "author": "Ya-MiC",
+  "homepage": "https://github.com/Ya-MiC/hermes/tree/dsh-plugins",
+  "license": "MIT",
+  "dsh": {
+    "minVersion": "*"
+  },
+  "plugins": [
+    {
+      "id": "dsh-yamic-repo-index",
+      "entry": "./src/dsh-yamic-repo-index/index.ts"
+    },
+    {
+      "id": "dsh-turn-clock",
+      "entry": "./src/dsh-turn-clock/index.ts"
+    },
+    {
+      "id": "dsh-quant-links",
+      "entry": "./src/dsh-quant-links/index.ts"
+    }
+  ]
+}
