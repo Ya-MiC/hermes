@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [dsh-plugins]
+  pull_request:
+    branches: [dsh-plugins]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Unit tests
+        run: npx vitest run
+      - name: Build
+        run: npm run build
+      - name: Smoke test (plugins load & execute end-to-end)
+        run: npx tsx smoke.ts
