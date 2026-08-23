@@ -7,6 +7,7 @@
 
 | Branch | Theme | Docs |
 |---|---|---|
+| [`roadmap`](https://github.com/Ya-MiC/hermes/tree/roadmap) | 🗺️ **The 5-year master roadmap — START HERE** | [EN](https://github.com/Ya-MiC/hermes/blob/roadmap/README.md) · [中文](https://github.com/Ya-MiC/hermes/blob/roadmap/README.zh.md) |
 | [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) | 🧩 DeepSeek Harness plugins & ecosystem | [EN](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.md) · [中文](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.zh.md) |
 | [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) | 📈 Quantitative trading | [EN](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.md) · [中文](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.zh.md) |
 | [`proxy-network`](https://github.com/Ya-MiC/hermes/tree/proxy-network) | 🌐 Proxies, subscriptions, Workers | [EN](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.md) · [中文](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.zh.md) |
