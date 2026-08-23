@@ -1,0 +1,49 @@
+{
+  "name": "hermes-dsh-plugins",
+  "version": "2.0.0",
+  "description": "Production-grade DeepSeek Harness (DSH) plugins: quant backtest, audit draft, IELTS coach, identity checklist",
+  "license": "MIT",
+  "author": "Ya-MiC",
+  "homepage": "https://github.com/Ya-MiC/hermes/tree/dsh-plugins",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./quant-backtest": "./dist/plugins/quant-backtest.js",
+    "./audit-draft": "./dist/plugins/audit-draft.js",
+    "./ielts-coach": "./dist/plugins/ielts-coach.js",
+    "./identity-checklist": "./dist/plugins/identity-checklist.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.0",
+    "@deepseek-ai/dsh-tools": "^0.0.1-rc.1",
+    "@deepseek-ai/schemastery": "^3.18.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.0.1-rc.1",
+    "@deepseek-ai/schemastery": "^3.18.1",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "tsx": "^4.23.12"
+  }
+}
