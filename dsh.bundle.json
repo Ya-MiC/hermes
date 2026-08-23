@@ -1,7 +1,7 @@
 {
   "name": "hermes-dsh-plugins",
-  "version": "1.0.0",
-  "description": "DSH plugins by Hermes for Ya-MiC — repo index shortcut, turn clock, quant links",
+  "version": "2.0.0",
+  "description": "Five DSH plugins by Hermes for Ya-MiC: repo index, turn clock, quant backtest, audit draft, IELTS coach, identity checklist",
   "author": "Ya-MiC",
   "homepage": "https://github.com/Ya-MiC/hermes/tree/dsh-plugins",
   "license": "MIT",
@@ -18,8 +18,20 @@
       "entry": "./src/dsh-turn-clock/index.ts"
     },
     {
-      "id": "dsh-quant-links",
-      "entry": "./src/dsh-quant-links/index.ts"
+      "id": "dsh-quant-backtest",
+      "entry": "./src/dsh-quant-backtest/index.ts"
+    },
+    {
+      "id": "dsh-audit-draft",
+      "entry": "./src/dsh-audit-draft/index.ts"
+    },
+    {
+      "id": "dsh-ielts-coach",
+      "entry": "./src/dsh-ielts-coach/index.ts"
+    },
+    {
+      "id": "dsh-identity-checklist",
+      "entry": "./src/dsh-identity-checklist/index.ts"
     }
   ]
 }
