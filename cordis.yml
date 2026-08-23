@@ -1,31 +1,26 @@
-# cordis.yml overlay — load these plugins into a local DSH checkout.
-# Replace /absolute/path/to/hermes with your real checkout path.
+# cordis.yml overlay — load the four engineered plugins into a local DSH checkout.
+# Build first: npm install && npm run build
+# Then replace ./hermes-dsh-plugins with your real checkout path.
 
 - insert:
-    - id: yamic-index
-      name: '/absolute/path/to/hermes/src/dsh-yamic-repo-index/index.ts'
-    - id: turn-clock
-      name: '/absolute/path/to/hermes/src/dsh-turn-clock/index.ts'
-      # config:
-      #   showMinutesOnly: true
     - id: quant-backtest
-      name: '/absolute/path/to/hermes/src/dsh-quant-backtest/index.ts'
+      name: './hermes-dsh-plugins/dist/plugins/quant-backtest.js'
       config:
         defaultFast: 20
         defaultSlow: 60
         feeBps: 5
     - id: audit-draft
-      name: '/absolute/path/to/hermes/src/dsh-audit-draft/index.ts'
+      name: './hermes-dsh-plugins/dist/plugins/audit-draft.js'
       config:
         locale: 'zh'
         watermark: '草稿——发布前必须经人工复核。'
     - id: ielts-coach
-      name: '/absolute/path/to/hermes/src/dsh-ielts-coach/index.ts'
+      name: './hermes-dsh-plugins/dist/plugins/ielts-coach.js'
       config:
         targetBand: 6.5
         examDate: '2028-06-30'
     - id: identity-checklist
-      name: '/absolute/path/to/hermes/src/dsh-identity-checklist/index.ts'
+      name: './hermes-dsh-plugins/dist/plugins/identity-checklist.js'
       config:
-        route: 'NZ Level7 -> work visa -> residence'
+        routeName: 'NZ Level7 -> work visa -> residence'
         deadlineYear: 2031
