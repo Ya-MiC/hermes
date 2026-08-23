@@ -1,25 +1,22 @@
-# DSH 插件
+# 🧩 Hermes DSH 插件
 
-> 共 4 个仓库 · 符合 [DSH (DeepSeek Harness)](https://github.com/deepseek-ai/deepseek-harness) 生态规范。
-## 目录
-- [自有仓库](#自有仓库)
-- [Fork 仓库](#fork-仓库)
-- [星标仓库](#星标仓库)
-- [English](./README.md)
+为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 编写的插件，遵循[官方插件规范](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.zh.md)。
 
-## 自有仓库
+## 插件列表
 
-- （无）
+| 插件 | 类型 | 说明 |
+|---|---|---|
+| [`dsh-yamic-repo-index`](./src/dsh-yamic-repo-index/index.ts) | 命令 | 新增 `/yamic-index` 命令，一键打开本索引仓库 |
+| [`dsh-turn-clock`](./src/dsh-turn-clock/index.ts) | 界面 | 回合耗时计时器，演示 `ctx.effect()` 生命周期清理 |
+| [`dsh-quant-links`](./src/dsh-quant-links/index.ts) | 工具 | 注册 `quant_links` 工具，返回精选量化框架清单 |
 
-## Fork 仓库
+## 安装 / 使用
 
-- **[Ya-MiC/deepseek-harness](https://github.com/Ya-MiC/deepseek-harness)** (Fork) - DeepSeek Harness: Everything is a Plugin. ★0
-- **[Ya-MiC/dsh-stock-watch](https://github.com/Ya-MiC/dsh-stock-watch)** (Fork) - A股自选股实时行情盯盘插件 - DeepSeek Harness Web 右上角可折叠弹窗 ★0
+```sh
+# 在 DSH 源码目录，通过 cordis.yml overlay 加载：
+pnpm dsh web --patch ./cordis.yml
+```
 
-## 星标仓库
+每个插件均符合规范：导出 `name` + `apply(ctx: Context)`，用 `inject` 声明依赖服务，用 `ctx.effect()` 清理资源。
 
-- **[Awu12277/dsh-stock-watch](https://github.com/Awu12277/dsh-stock-watch)** (Star) - A股自选股实时行情盯盘插件 - DeepSeek Harness Web 右上角可折叠弹窗 `JavaScript` ★61
-- **[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)** (Star) - DeepSeek Harness: Everything is a Plugin. `TypeScript` ★187035
-
----
-⬅ 返回[总索引](https://github.com/Ya-MiC/hermes/tree/main)
+文档：**[中文](./README.zh.md)** · **[English](./README.md)** ⬅ 返回[总索引](https://github.com/Ya-MiC/hermes/tree/main)
