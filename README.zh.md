@@ -7,6 +7,7 @@
 
 | 分支 | 主题 | 文档 |
 |---|---|---|
+| [`roadmap`](https://github.com/Ya-MiC/hermes/tree/roadmap) | 🗺️ **五年主線路線圖——從這裡開始** | [中文](https://github.com/Ya-MiC/hermes/blob/roadmap/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/roadmap/README.md) |
 | [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) | 🧩 DeepSeek Harness 插件生态 | [中文](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/dsh-plugins/README.md) |
 | [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) | 📈 量化交易 | [中文](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/quant-trading/README.md) |
 | [`proxy-network`](https://github.com/Ya-MiC/hermes/tree/proxy-network) | 🌐 代理、订阅、Workers | [中文](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.zh.md) · [EN](https://github.com/Ya-MiC/hermes/blob/proxy-network/README.md) |
