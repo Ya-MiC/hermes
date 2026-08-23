@@ -82,3 +82,9 @@
 - 每个分支双语文档（`README.md` / `README.zh.md`）
 
 ➡ English: [README.md](./README.md)
+
+## 🔒 配套私庫
+
+敏感的個人規劃（國家推薦、身份評分）存於私有倉庫 [hermes-private](https://github.com/Ya-MiC/hermes-private)。
+
+體系架構說明見 [SYSTEM.md](./SYSTEM.md)。
