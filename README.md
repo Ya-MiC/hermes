@@ -1,26 +1,22 @@
-# DSH Plugins / DSH 插件
+# 🧩 Hermes DSH Plugins
 
-> 4 repositories · Maintained under the [DSH (DeepSeek Harness)](https://github.com/deepseek-ai/deepseek-harness) ecosystem standard.
+Plugins for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), written to the [official plugin spec](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.md).
 
-## Table of Contents
-- [Owned](#owned)
-- [Forked](#forked)
-- [Starred](#starred)
-- [中文](./README.zh.md)
+## Plugins
 
-## Owned
+| Plugin | Type | Description |
+|---|---|---|
+| [`dsh-yamic-repo-index`](./src/dsh-yamic-repo-index/index.ts) | Command | Adds `/yamic-index` command opening this index |
+| [`dsh-turn-clock`](./src/dsh-turn-clock/index.ts) | UI | Elapsed-time counter per turn, with `ctx.effect()` cleanup |
+| [`dsh-quant-links`](./src/dsh-quant-links/index.ts) | Tool | `quant_links` tool listing curated quant frameworks |
 
-- (none)
+## Install / Usage
 
-## Forked
+```sh
+# From a DSH checkout, load via cordis.yml overlay:
+pnpm dsh web --patch ./cordis.yml
+```
 
-- **[Ya-MiC/deepseek-harness](https://github.com/Ya-MiC/deepseek-harness)** (Fork) - DeepSeek Harness: Everything is a Plugin. ★0
-- **[Ya-MiC/dsh-stock-watch](https://github.com/Ya-MiC/dsh-stock-watch)** (Fork) - A股自选股实时行情盯盘插件 - DeepSeek Harness Web 右上角可折叠弹窗 ★0
+Each plugin follows the spec: exports `name` + `apply(ctx: Context)`, declares services via `inject`, cleans up via `ctx.effect()`.
 
-## Starred
-
-- **[Awu12277/dsh-stock-watch](https://github.com/Awu12277/dsh-stock-watch)** (Star) - A股自选股实时行情盯盘插件 - DeepSeek Harness Web 右上角可折叠弹窗 `JavaScript` ★61
-- **[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)** (Star) - DeepSeek Harness: Everything is a Plugin. `TypeScript` ★187035
-
----
-⬅ Back to [main index](https://github.com/Ya-MiC/hermes/tree/main)
+Docs: **[English](./README.md)** · **[中文](./README.zh.md)** ⬅ back to [main](https://github.com/Ya-MiC/hermes/tree/main)
