@@ -1,9 +1,31 @@
-# cordis.yml overlay — load these plugins into a local DSH checkout
+# cordis.yml overlay — load these plugins into a local DSH checkout.
 # Replace /absolute/path/to/hermes with your real checkout path.
+
 - insert:
     - id: yamic-index
       name: '/absolute/path/to/hermes/src/dsh-yamic-repo-index/index.ts'
     - id: turn-clock
       name: '/absolute/path/to/hermes/src/dsh-turn-clock/index.ts'
-    - id: quant-links
-      name: '/absolute/path/to/hermes/src/dsh-quant-links/index.ts'
+      # config:
+      #   showMinutesOnly: true
+    - id: quant-backtest
+      name: '/absolute/path/to/hermes/src/dsh-quant-backtest/index.ts'
+      config:
+        defaultFast: 20
+        defaultSlow: 60
+        feeBps: 5
+    - id: audit-draft
+      name: '/absolute/path/to/hermes/src/dsh-audit-draft/index.ts'
+      config:
+        locale: 'zh'
+        watermark: '草稿——发布前必须经人工复核。'
+    - id: ielts-coach
+      name: '/absolute/path/to/hermes/src/dsh-ielts-coach/index.ts'
+      config:
+        targetBand: 6.5
+        examDate: '2028-06-30'
+    - id: identity-checklist
+      name: '/absolute/path/to/hermes/src/dsh-identity-checklist/index.ts'
+      config:
+        route: 'NZ Level7 -> work visa -> residence'
+        deadlineYear: 2031
