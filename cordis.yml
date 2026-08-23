@@ -1,0 +1,9 @@
+# cordis.yml overlay — load these plugins into a local DSH checkout
+# Replace /absolute/path/to/hermes with your real checkout path.
+- insert:
+    - id: yamic-index
+      name: '/absolute/path/to/hermes/src/dsh-yamic-repo-index/index.ts'
+    - id: turn-clock
+      name: '/absolute/path/to/hermes/src/dsh-turn-clock/index.ts'
+    - id: quant-links
+      name: '/absolute/path/to/hermes/src/dsh-quant-links/index.ts'
