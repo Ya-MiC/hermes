@@ -1,22 +1,31 @@
-# 🧩 Hermes DSH 插件
+# 🧩 Hermes DSH 插件 v2.0
 
-为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 编写的插件，遵循[官方插件规范](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.zh.md)。
+六个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件——一切皆插件。
+严格遵循官方规范：[`defineTool`](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/tool.zh.md) + Schemastery `Config`（[配置文档](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/config.zh.md)）。
 
-## 插件列表
+## 六个插件
 
-| 插件 | 类型 | 说明 |
-|---|---|---|
-| [`dsh-yamic-repo-index`](./src/dsh-yamic-repo-index/index.ts) | 命令 | 新增 `/yamic-index` 命令，一键打开本索引仓库 |
-| [`dsh-turn-clock`](./src/dsh-turn-clock/index.ts) | 界面 | 回合耗时计时器，演示 `ctx.effect()` 生命周期清理 |
-| [`dsh-quant-links`](./src/dsh-quant-links/index.ts) | 工具 | 注册 `quant_links` 工具，返回精选量化框架清单 |
+| 插件 | 类型 | 功能 | 对应路线图阶段 |
+|---|---|---|---|
+| `dsh-yamic-repo-index` | 命令 | `/yamic-index` 一键打开本索引 | 全部 |
+| `dsh-turn-clock` | 界面 | 回合耗时计时器（演示 `ctx.effect()` 清理） | 全部 |
+| **`dsh-quant-backtest`** | 工具 | `quant_backtest` —— 双均线交叉回测，含夏普/最大回撤；快慢窗口与费率走 Config 可配 | 阶段一→二 收入 |
+| **`dsh-audit-draft`** | 工具 | `audit_draft` —— 结构化 findings 渲染审计报告草稿，按风险排序，支持中英文 | 阶段一→三 产品 |
+| **`dsh-ielts-coach`** | 工具组 | `ielts_log` / `ielts_progress` —— 学习打卡与进度对照（目标 6.5） | 阶段一 语言 |
+| **`dsh-identity-checklist`** | 工具组 | `identity_status` / `identity_done` —— 新西兰 Level7 里程碑追踪 | 阶段四 身份 |
 
-## 安装 / 使用
+加粗为 v2 新增。每个工具插件导出 `name`、`inject = ['tools']`、Schemastery `Config` 模式（可调项全部走配置、零硬编码），并以带类型的参数注册工具。
+
+## 安装
 
 ```sh
-# 在 DSH 源码目录，通过 cordis.yml overlay 加载：
 pnpm dsh web --patch ./cordis.yml
 ```
 
-每个插件均符合规范：导出 `name` + `apply(ctx: Context)`，用 `inject` 声明依赖服务，用 `ctx.effect()` 清理资源。
+然后直接对 agent 说：
 
-文档：**[中文](./README.zh.md)** · **[English](./README.md)** ⬅ 返回[总索引](https://github.com/Ya-MiC/hermes/tree/main)
+> 用 quant_backtest 回测这组收盘价：[100, 101.5, ...]
+> 记录一次雅思写作练习 45 分钟，模考 5.5 分
+> 显示我的身份清单进度
+
+文档：**[中文](./README.zh.md)** · **[English](./README.md)** · 路线图：[roadmap 分支](https://github.com/Ya-MiC/hermes/tree/roadmap) · ⬅ 返回[总索引](https://github.com/Ya-MiC/hermes/tree/main)
