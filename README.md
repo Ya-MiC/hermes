@@ -82,3 +82,7 @@ This repository follows the [DeepSeek Harness](https://github.com/deepseek-ai/de
 - Bilingual docs per branch (`README.md` / `README.zh.md`)
 
 ⬅ 中文版：[README.zh.md](./README.zh.md)
+
+## 🏗️ Architecture / 架構
+
+See [SYSTEM.md](./SYSTEM.md) for the full system design. Sensitive personal planning lives in the private companion repo [hermes-private](https://github.com/Ya-MiC/hermes-private).
