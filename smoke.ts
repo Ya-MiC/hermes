@@ -3,7 +3,7 @@
  * Proves the plugins actually load and execute — not just compile.
  */
 import { Context, Service } from '@deepseek-ai/cordis'
-import { quantBacktest, auditDraft, ieltsCoach, identityChecklist } from './src/index.js'
+import { quantBacktest, auditDraft, ieltsCoach, identityChecklist, momentumScreen, riskSize } from './src/index.js'
 
 class ToolsService extends Service {
   tools = new Map<string, { execute: (args: unknown) => Promise<unknown> }>()
@@ -39,9 +39,11 @@ async function main() {
   auditDraft(ctx as never, configs.audit)
   ieltsCoach(ctx as never, configs.ielts)
   identityChecklist(ctx as never, configs.identity)
+  momentumScreen(ctx as never, { minBars: 120 })
+  riskSize(ctx as never, { defaultRiskPct: 1, maxHeatPct: 6 })
 
   console.log('registered tools:', [...ctx.tools.tools.keys()].join(', '))
-  if (ctx.tools.tools.size !== 6) throw new Error(`expected 6 tools, got ${ctx.tools.tools.size}`)
+  if (ctx.tools.tools.size !== 10) throw new Error(`expected 10 tools, got ${ctx.tools.tools.size}`)
 
   // 1. backtest on a synthetic ramp
   const closes = Array.from({ length: 130 }, (_, i) => 100 * Math.exp(0.004 * i))
@@ -74,7 +76,19 @@ async function main() {
   console.log('identity_status →\n' + st)
   if (!String(st).includes('[x] IELTS')) throw new Error('milestone not marked')
 
-  console.log('\n✅ SMOKE TEST PASSED: all 4 plugins load & execute end-to-end')
+  // 5. momentum screen on a synthetic ramp
+  const ramp = Array.from({ length: 300 }, (_, i) => 100 * Math.exp(0.003 * i))
+  const scr = await ctx.tools.get('momentum_screen')!.execute({ closes: ramp })
+  console.log('momentum_screen →', JSON.stringify(scr))
+
+  // 6. risk sizing roundtrip
+  const sz = await ctx.tools.get('position_size_atr')!.execute({ equity: 10_000, entry: 100, stop: 95 })
+  console.log('position_size_atr →', JSON.stringify(sz))
+  const heat = await ctx.tools.get('portfolio_heat')!.execute({ equity: 10_000, tradeRisks: [150, 200] })
+  console.log('portfolio_heat →', JSON.stringify(heat))
+  if (!(sz as any).shares) throw new Error('sizer returned no shares')
+
+  console.log('\n✅ SMOKE TEST PASSED: all 6 plugins load & execute end-to-end')
   process.exit(0)
 }
 
