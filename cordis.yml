@@ -1,0 +1,35 @@
+# cordis.yml overlay — load the four engineered plugins into a local DSH checkout.
+# Build first: npm install && npm run build
+# Then replace ./hermes-dsh-plugins with your real checkout path.
+
+- insert:
+    - id: quant-backtest
+      name: './hermes-dsh-plugins/dist/plugins/quant-backtest.js'
+      config:
+        defaultFast: 20
+        defaultSlow: 60
+        feeBps: 5
+    - id: audit-draft
+      name: './hermes-dsh-plugins/dist/plugins/audit-draft.js'
+      config:
+        locale: 'zh'
+        watermark: '草稿——发布前必须经人工复核。'
+    - id: ielts-coach
+      name: './hermes-dsh-plugins/dist/plugins/ielts-coach.js'
+      config:
+        targetBand: 6.5
+        examDate: '2028-06-30'
+    - id: identity-checklist
+      name: './hermes-dsh-plugins/dist/plugins/identity-checklist.js'
+      config:
+        routeName: 'NZ Level7 -> work visa -> residence'
+        deadlineYear: 2031
+    - id: momentum-screen
+      name: './hermes-dsh-plugins/dist/plugins/momentum-screen.js'
+      config:
+        minBars: 120
+    - id: risk-size
+      name: './hermes-dsh-plugins/dist/plugins/risk-size.js'
+      config:
+        defaultRiskPct: 1
+        maxHeatPct: 6
