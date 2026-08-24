@@ -10,15 +10,19 @@
 ## The Master Line / 主線一覽
 
 ```
-Phase 1 (2026-2027)      Phase 2 (2027-2028)       Phase 3 (2028-2030)      Phase 4 (2030+)
-SKILL UP                 FIRST INCOME              GO GLOBAL                 IDENTITY
-Skills & tools           First passive income      Software sold worldwide   Foreign passport
-能力与工具                第一笔被动收入              软件全球出售               30岁前身份落地
-   |                         |                         |                        |
-quant-toolkit -----------> small capital  <--------> SaaS products ----+     HK/Overseas
-audit-agent  -----------> freelance gigs             global payments         banking rails
-ielts-plan   ---> 3yr IELTS window ==================> required for visa
-identity-kit ==========================================> NZ Level7 route ===>
+              ┌──────────── COMPOUNDING FLYWHEEL (human timelines loop) ────────────┐
+              │                                                                     │
+ quant returns ↑      policy-RAG SaaS MRR ↑        income + IELTS 6.5 = visa menu ↑    │
+      │                     │                            ↓                            │
+[Ph1 SKILL UP] ──> [Ph2 FIRST INCOME] ──> [Ph3 GO GLOBAL] ──> [Ph4 IDENTITY]          │
+ quant-toolkit      small capital         vertical SaaS           NZ residence        │
+ audit-agent        freelance gigs        policy-rag SaaS ⭐      2yr-return keeps it │
+ ielts-plan ─────────────────────────────> visa bars lowered <────┘                    │
+      ↑                                                                              │
+      └── AI progress lowers build cost every year: same tools cheaper next year ────┘
+
+⭐ policy-rag-saas: immigration-policy PDFs → RAG → packaged skills → subscription.
+   Second engine alongside quant: quant eats volatility, SaaS eats policy anxiety.
 ```
 
 ---
