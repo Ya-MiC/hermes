@@ -3,7 +3,13 @@
 > This branch is the **spine** of the whole `hermes` index. Every other branch is a tool that serves a phase below.
 > 本分支是整個 hermes 倉庫的**主線**。其他所有分支都是為下列階段服務的工具。
 
-**Profile**: Born Feb 2006 · Business Data Analysis major (Year 2) · Family background in accounting & audit · Goals: passive income via quant → sell agent-built software globally → foreign identity before 30.
+**Profile**: Born Feb 2006 · Business Data Analysis major (Year 2) · Family background in accounting & audit.
+
+**Main-line positioning (user-calibrated Aug 2026): Audit Agent = the audit operating system for SMBs in China's Unified National Market.**
+- CapCut-style subscription pricing; Big-4 quality at small-firm prices
+- National-level niche: fed by BOTH the unified-market and foreign-trade strategies; "DJI mode" — keep head down, build
+- Full spec: [AUDIT-SOFTWARE-MASTERPLAN.md](https://github.com/Ya-MiC/hermes/blob/ai-agents/AUDIT-SOFTWARE-MASTERPLAN.md)
+- Time pressure: 10k users in 2 years — the window is closing
 
 ---
 
@@ -34,7 +40,7 @@
 | Deliverable | Lives in | Status |
 |---|---|---|
 | Quant starter toolkit (data → signal → backtest) | [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) + `tools/` here | 🔨 building |
-| Audit/report generator (family-trade vertical) | `tools/audit-agent/` here | 🔨 building |
+| **Audit Agent (THE TRUNK)**: SMB audit OS for the unified national market | [masterplan](https://github.com/Ya-MiC/hermes/blob/ai-agents/AUDIT-SOFTWARE-MASTERPLAN.md) | 🎯 sprinting |
 | IELTS study plan (target ≥6.5 by 2028) | `ielts-plan.md` here | 📋 drafted |
 | DSH plugins as public portfolio pieces | [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) | ✅ v1.0 |
 
