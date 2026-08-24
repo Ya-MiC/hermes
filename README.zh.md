@@ -3,7 +3,13 @@
 > 本分支是整個 `hermes` 倉庫的**脊柱**——其他每個分支都是為下面某個階段服務的工具。
 > 半成品不再是散落的碎片，而是主線上待完成的節點。
 
-**檔案**：2006 年 2 月生 · 商務數據分析專業大二 · 家庭會計審計背景 · 目標：量化被動收入 → agent 軟件全球出售 → 30 歲前拿國外身份。
+**檔案**：2006 年 2 月生 · 商務數據分析專業大二 · 家庭會計審計背景。
+
+**主線定位（2026-08 用戶校準）：審計智能體 = 全國統一大市場的中小企業審計作業系統**
+- 剪映式訂閱制收費，對標四大八大品質、中小所買得起的價格
+- 國家級縫隙：統一大市場+外貿雙戰略餵養，大疆模式苟住發展
+- 詳見 ai-agents 分支 [AUDIT-SOFTWARE-MASTERPLAN.md](https://github.com/Ya-MiC/hermes/blob/ai-agents/AUDIT-SOFTWARE-MASTERPLAN.md)
+- 時間壓力：2年萬人用戶，窗口正在關閉（金蝶/用友在下沉）
 
 ---
 
@@ -32,7 +38,7 @@
 | 交付物 | 位置 | 狀態 |
 |---|---|---|
 | 量化入門工具箱（數據→信號→回測） | [`quant-trading`](https://github.com/Ya-MiC/hermes/tree/quant-trading) + 本分支 `tools/` | 🔨 建設中 |
-| 審計/報告生成器（家庭行業垂直） | 本分支 `tools/audit-agent/` | 🔨 建設中 |
+| **審計智能體（主幹！）**: 全國統一大市場中小企業審計作業系統 | [ai-agents 分支規格書](https://github.com/Ya-MiC/hermes/blob/ai-agents/AUDIT-SOFTWARE-MASTERPLAN.md) | 🎯 主線衝刺中 |
 | 雅思學習計劃（2028 前 ≥6.5） | `ielts-plan.md` | 📋 已起草 |
 | DSH 插件作為公開作品集 | [`dsh-plugins`](https://github.com/Ya-MiC/hermes/tree/dsh-plugins) | ✅ v1.0 |
 
