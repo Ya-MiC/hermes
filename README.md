@@ -42,6 +42,18 @@ npm run build         # emit dist/
 npx tsx smoke.ts      # load into Cordis + execute all tools
 ```
 
+
+## v2.2 — Quant expansion (2026-08)
+
+Two new plugins (still **no order execution, no keys**):
+
+| Plugin | Tools | What it does |
+|---|---|---|
+| `dsh-momentum-screen` | `momentum_screen` | Breakout-readiness score: 52w-high proximity, 90d momentum, vol-contraction |
+| `dsh-risk-size` | `position_size_atr`, `portfolio_heat`, `kelly_fraction` | Half-Kelly fraction, ATR stop sizing, portfolio heat cap |
+
+**Now 6 plugins / 10 tools.** 26 unit tests, CI green.
+
 ## Install into DSH
 
 ```sh
