@@ -1,7 +1,7 @@
 {
   "name": "hermes-dsh-plugins",
-  "version": "2.1.0",
-  "description": "Production-grade DeepSeek Harness plugins: quant backtest, audit report drafts, IELTS coach, identity checklist",
+  "version": "2.2.0",
+  "description": "Six production-grade DeepSeek Harness plugins: quant backtest, momentum screen, risk sizing, audit drafts, IELTS coach, identity checklist",
   "author": "Ya-MiC",
   "homepage": "https://github.com/Ya-MiC/hermes/tree/dsh-plugins",
   "license": "MIT",
@@ -24,6 +24,14 @@
     {
       "id": "dsh-identity-checklist",
       "entry": "./dist/plugins/identity-checklist.js"
+    },
+    {
+      "id": "dsh-momentum-screen",
+      "entry": "./dist/plugins/momentum-screen.js"
+    },
+    {
+      "id": "dsh-risk-size",
+      "entry": "./dist/plugins/risk-size.js"
     }
   ]
 }
