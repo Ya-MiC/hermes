@@ -3,6 +3,17 @@
 > A curated, **DeepSeek Harness (DSH)-compliant** index of all repositories owned, forked and starred by [Ya-MiC](https://github.com/Ya-MiC).
 > Every entry is real data, organized into thematic branches with bilingual docs (English / 中文).
 
+## 🐙 Business Core / 业务核心（Audit OS 湛箴）
+
+> The actual product being built — see [Ya-MiC/action-tree](https://github.com/Ya-MiC/action-tree) (spec authority, private) and its INDEX.md as the single business entry point.
+
+| Repo | Role | Status |
+|---|---|---|
+| [Ya-MiC/zhanzhen](https://github.com/Ya-MiC/zhanzhen) 🐙 | **Main software** — voucher→OCR→journal→rules→traceable report pipeline (FastAPI + Vue3 + DSH plugin) | v0.1.0, 31 tests green |
+| [Ya-MiC/audit-os](https://github.com/Ya-MiC/audit-os) | CLI reference implementation (12-rule engine) | v0.1, 15 tests green |
+| [Ya-MiC/audit-os-mobile](https://github.com/Ya-MiC/audit-os-mobile) | Android APK (offline engine, demo) | v0.3 |
+| [Ya-MiC/action-tree](https://github.com/Ya-MiC/action-tree) | Spec authority: masterplan + specs + ADRs (private) | docs 01-05 complete |
+
 ## 🌿 Branches / 分支导航
 
 | Branch | Theme | Docs |
