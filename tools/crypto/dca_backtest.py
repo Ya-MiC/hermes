@@ -37,7 +37,8 @@ def _fetch_binance(symbol: str, start_ms: int, end_ms: int) -> list[float]:
 
 def _fetch_coinbase(symbol: str, years: int) -> list[float]:
     """Coinbase caps granularity at 6h/300 candles per call -> fetch daily, sample weekly."""
-    product = symbol.replace("USDT", "-USD").replace("USD", "-USD")
+    base = symbol[:-4] if symbol.endswith("USDT") else (symbol[:-3] if symbol.endswith("USD") else symbol)
+    product = f"{base}-USD"
     step = 86400  # daily
     end = int(time.time())
     start = end - years * 365 * 86400
