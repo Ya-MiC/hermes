@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ya-MiC · GitHub 倉庫總覽 · 溫潤設計系統 v3.1</title>
+<style>
+  :root{
+    --c-cloud-paper:#F8F6EF;
+    --c-cloud-sky:#B9DDF1;
+    --c-cloud-pink:#F4DDE7;
+    --c-cloud-violet:#CDBFE0;
+    --c-earth-oat:#E8E3CC;
+    --c-earth-sage:#b7c8a8;
+    --c-earth-linen:#CBBF9E;
+    --c-earth-cocoa:#A38E7A;
+    --ink-1:#3D3833;
+    --ink-2:#6E675E;
+    --ink-3:#9C948A;
+    --radius:16px;
+    --glass:rgba(255,255,255,0.7);
+    --glass-border:rgba(255,255,255,0.55);
+    --shadow:0 8px 32px rgba(61,56,51,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{font-size:16px}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans TC","Noto Sans SC","PingFang TC",sans-serif;
+    background:var(--c-cloud-paper);
+    color:var(--ink-1);
+    line-height:1.6;
+    min-height:1400px;
+  }
+  a{color:var(--c-cloud-sky);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .shell{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    grid-template-rows:auto 1fr auto;
+    min-height:1400px;
+  }
+  header{
+    grid-column:1/-1;
+    background:var(--glass);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--glass-border);
+    padding:24px 32px;
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .brand{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em}
+  .brand .emoji{margin-right:8px}
+  .subtitle{font-size:0.875rem;color:var(--ink-2);margin-top:4px}
+
+  aside{
+    grid-row:2/4;
+    background:var(--glass);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border-right:1px solid var(--glass-border);
+    padding:24px;
+    overflow-y:auto;
+    position:sticky;
+    top:0;
+    height:1400px;
+  }
+  aside h3{font-size:0.9rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-2);margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--glass-border)}
+  aside ul{list-style:none}
+  aside li{margin:6px 0}
+  aside a{color:var(--ink-1);font-weight:500}
+  aside a:hover{color:var(--c-cloud-sky)}
+
+  main{
+    grid-row:2/4;
+    padding:40px 48px;
+    overflow-y:auto;
+  }
+  footer{
+    grid-column:1/-1;
+    background:var(--glass);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-top:1px solid var(--glass-border);
+    padding:24px 32px;
+    text-align:center;
+    color:var(--ink-2);
+    font-size:0.875rem;
+  }
+
+  h2{
+    font-size:1.5rem;
+    margin:0 0 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  h2 span{font-size:1.75rem}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:20px;
+  }
+
+  .repo-card{
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border:1px solid var(--glass-border);
+    border-radius:var(--radius);
+    padding:20px;
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+  }
+  .repo-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+    border-color:var(--c-cloud-sky);
+  }
+  .repo-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+  .repo-header h3{font-size:1.1rem;font-weight:600}
+  .repo-header h3 a{color:var(--ink-1)}
+  .repo-header h3 a:hover{color:var(--c-cloud-sky);text-decoration:none}
+  .badges{display:flex;gap:6px;margin-top:4px}
+  .badge{
+    font-size:0.7rem;
+    padding:2px 8px;
+    border-radius:12px;
+    font-weight:600;
+  }
+  .badge.private{background:var(--c-earth-cocoa);color:#fff}
+  .badge.fork{background:var(--ink-3);color:#fff}
+  .repo-desc{font-size:0.9rem;color:var(--ink-2);margin-bottom:12px;line-height:1.5}
+  .repo-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{
+    font-size:0.75rem;
+    padding:3px 10px;
+    border-radius:10px;
+    background:var(--c-earth-oat);
+    color:var(--ink-1);
+    font-weight:500;
+  }
+  .repo-details{font-size:0.8rem;color:var(--ink-3)}
+  .repo-details summary{
+    cursor:pointer;
+    margin-top:8px;
+    font-weight:500;
+    color:var(--c-cloud-sky);
+  }
+  .readme-preview{margin-top:6px;font-size:0.75rem;color:var(--ink-3);font-style:italic}
+
+  .comparison-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-top:16px;
+  }
+  .col{
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border:1px solid var(--glass-border);
+    border-radius:var(--radius);
+    padding:24px;
+  }
+  .col.red{border-left:4px solid #ef4444}
+  .col.blue{border-left:4px solid #3b82f6}
+  .col h3{font-size:1.1rem;margin-bottom:12px;color:var(--ink-1)}
+  .col.red h3{color:#dc2626}
+  .col.blue h3{color:#2563eb}
+  .col ul{list-style:none}
+  .col li{
+    margin:8px 0;
+    padding-left:20px;
+    position:relative;
+    font-size:0.9rem;
+    color:var(--ink-2);
+  }
+  .col li::before{
+    content:"•";
+    position:absolute;
+    left:0;
+    color:var(--c-cloud-sky);
+    font-weight:700;
+  }
+  .col.red li::before{color:#ef4444}
+  .col.blue li::before{color:#3b82f6}
+
+  @media (max-width:900px){
+    .shell{grid-template-columns:1fr}
+    aside{grid-row:3;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--glass-border)}
+    .comparison-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="brand"><span class="emoji">🐙</span>Ya-MiC / Ya-MIC</div>
+    <div class="subtitle">晏銘湛箴 · GitHub 倉庫總覽與品牌索引 · 溫潤設計系統 v3.1 · 僅雲端編輯，未 clone 到本地</div>
+  </header>
+  <aside>
+    <h3>導覽</h3>
+    <ul>
+      <li><a href="#red-blue">🔴🔵 紅藍對抗：錯誤與修正</a></li>
+      <li><a href="#brand">1️⃣ 晏銘湛箴 / ymzz 品牌系</a></li>
+      <li><a href="#audit">2️⃣ zhanzhen / audit-os 審計合規</a></li>
+      <li><a href="#dsh">3️⃣ DSH / 技能生態與自動化</a></li>
+      <li><a href="#tools">4️⃣ 工具與實驗倉庫</a></li>
+      <li><a href="#forks">5️⃣ Fork 外部系（37 個）</a></li>
+    </ul>
+    <h3>統計</h3>
+    <ul>
+      <li>總計：<b>96</b> 個倉庫</li>
+      <li>公開：<b>74</b> · 私有：<b>22</b></li>
+      <li>自有：<b>59</b> · Fork：<b>37</b></li>
+    </ul>
+  </aside>
+  <main>
+    
+<section class="red-blue" id="red-blue">
+  <h2>🔴🔵 紅藍對抗：舊 README 錯誤 vs 新 README 修正</h2>
+  <div class="comparison-grid">
+    <div class="col red">
+      <h3>🔴 舊 README (Ya-MIC/README.md)</h3>
+      <ul>
+        <li>只有個人簡介，沒有任何倉庫分類</li>
+        <li>96 個倉庫完全不可見，訪客不知道你幹什麼</li>
+        <li>沒有區分公有與私有倉庫</li>
+        <li>沒有區分自有與 Fork 倉庫</li>
+        <li>沒有設計系統代碼標準（溫潤 v3.1 tokens 缺失）</li>
+        <li>沒有技能 (Skill) 對照表，用戶不知道該裝什麼</li>
+        <li>沒有 GitHub Pages 現狀，dsh Pages 錯誤無人知曉</li>
+        <li>沒有優化建議順序（P0→P3 缺失）</li>
+        <li>字體混用，無統一柵欄對齊</li>
+        <li>沒有玻璃擬態動畫，視覺平庸</li>
+      </ul>
+    </div>
+    <div class="col blue">
+      <h3>🔵 新 README (已 commit 到 GitHub)</h3>
+      <ul>
+        <li>5 個分類區塊涵蓋全部 96 個倉庫</li>
+        <li>每個倉庫標註 私有/自有/Fork，帶根目錄檔案預覽</li>
+        <li>品牌系、審計合規、DSH 生態、工具實驗、Fork 外部系清晰分離</li>
+        <li>溫潤設計系統 v3.1 代碼標準（雲箋／陶土四色封頂）</li>
+        <li>技能 (Skill) 對照表：shadcn、design-system、frontend-design、ui-taste、agent-browser、find-skills</li>
+        <li>GitHub Pages 現狀表（標出 dsh Unicorn 錯誤需優先修復）</li>
+        <li>P0→P3 優化建議順序</li>
+        <li>舊版內容保留在底部 <details>，不刪除</li>
+        <li>純雲端操作，未 clone 任何內容到本地</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+    
+    <section class="repo-section" id="brand">
+      <h2>🏷️ 晏銘湛箴 / ymzz 品牌系（核心品牌，美學對齊優先）</h2>
+      <div class="grid">
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/yanming-official-website" target="_blank">yanming-official-website</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴官網 — 溫潤設計系統視覺識別與品牌白皮書 · GitHub Pages 預覽 · MIT</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.nojekyll, index.html</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymz-atlas" target="_blank">ymz-atlas</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">星圖 Atlas — $0.99 買斷 · 星雲圖/樹圖/等高線 · Vue3+Tauri2+Rust · 晏銘湛箴</p>
+      <div class="repo-meta"><span class="chip">Vue</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, .npmrc, AGENTS.md, LICENSE, README.md, index.html</summary>
+        <div class="readme-preview"># 星圖 Atlas
+
+本機資料宇宙：**星雲圖 · 樹圖 · 等高線**  
+Vue 3 + Tauri 2 + Rust · **$0.99 買斷** · PayPal：`cao417090217@gmail.com`
+
+| | |
+|---|---|
+| 官網（含下載引導） | https://ya-mic.github.io/ymz-atlas/ |
+| 兌換碼頁 | https://ya...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymz-creative-visualizer" target="_blank">ymz-creative-visualizer</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">Local-first, Markdown-driven pixel-style AI video creation studio. Bring your own API. Vue 3 + Tauri 2 + Rust. | 本地優先、Markdown 驅動的像素風 AI 視頻創作工作臺。</p>
+      <div class="repo-meta"><span class="chip">TypeScript</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, AGENTS.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, PULL_REQUEST_TEMPLATE.md</summary>
+        <div class="readme-preview"># 你的創意視覺化呈現
+
+Local-first, Markdown-driven pixel-style AI video creation studio. Bring your own API. Vue 3 + Tauri 2 + Rust.
+
+| | |
+|---|---|
+| 官網 | 待建置 |
+| 下載 | 待 Releases 發布 |
+| 源碼 | https://github.c...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymz-pixel-mv" target="_blank">ymz-pixel-mv</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴 · 像素風 MV 製作平台 · Vue 3 + Tauri 2 + Rust · 2:3 / 16:9 雙輸出</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz" target="_blank">ymzz</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">湛箴_ymzz — 基於 DeepSeek Harness 的本地優先智能體</p>
+      <div class="repo-meta"><span class="chip">TypeScript</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.editorconfig, .gitattributes, .gitignore, .gitlab-ci.yml, .jscpd.json, .oxlintrc.json</summary>
+        <div class="readme-preview"># 湛箴_ymzz
+
+&lt;img src=&quot;ymzz/branding/generated/preview-512.png&quot; width=&quot;88&quot; alt=&quot;Owner-supplied 湛箴_ymzz product icon&quot;&gt;
+
+**The complete DeepSeek Harness application, with a small native ymzz plugin extens...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz-bead-atlas" target="_blank">ymzz-bead-atlas</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">YMZZ Bead Atlas · 晏銘湛箴_拼豆圖譜：多品牌拼豆圖紙 Skill，CIEDE2000 匹配 MARD/Hama/Perler/Artkal 等 15 品牌 2093 色，色卡可改、可存自訂色群</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, LICENSE, NOTICE.md, README.md, SKILL.md, requirements.txt</summary>
+        <div class="readme-preview"># YMZZ Bead Atlas · 晏銘湛箴_拼豆圖譜
+
+把一張圖片轉成能逐格製作、能逐格核色、能直接備料的拼豆圖紙。Claude Skill 格式，可安裝到 Codex、Claude Code、WorkBuddy、Cursor 等支援 Agent Skills 的環境。
+
+倉庫：https://github.com/Ya-MiC/ymzz-bead-atlas
+
+## 1. 解決什麼問題
+
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz-loop" target="_blank">ymzz-loop</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">Your daily review, on a loop: GitHub Actions drops a fresh daily-review template into Notion every morning, emails you, then backs up yesterday to Google Sheets and Markdown in your own fork. $0, any time zone, no servers. Open source by 晏銘湛箴.</p>
+      <div class="repo-meta"><span class="chip">Rust</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, CHANGELOG.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md, CREDITS.md, LICENSE</summary>
+        <div class="readme-preview"># 稟冊
+
+稟冊是晏銘湛箴（ymzz）的本機私人事務稟報，也是 Alipay PAYATHON 2026 **Vibe Pay 賽道**的作品。設計 Skill 那一份是另一個儲存庫的 Skill 賽道，不在這裡。這份作品留在你這台電腦上，把檔案、對話、復盤和沙箱收款收成一份給你看的彙報。稱呼、電話和金鑰不送走。
+
+「稟」是呈給擁有者的報告，「冊」是留在本機的那一本。產品要交的是這份彙報，不是一個...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz-wenrun-design-skill" target="_blank">ymzz-wenrun-design-skill</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">溫潤美學 Skill：將網頁視覺邏輯延伸至 PPTX、DOCX、XLSX 的設計與輸出規範。 Wenrun design skill for consistent web and Office document aesthetics.</p>
+      <div class="repo-meta"><span class="chip">Python</span><span class="chip">⭐ 1</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, LICENSE, README.md, SKILL.md, THIRD-PARTY.md, requirements-dev.txt</summary>
+        <div class="readme-preview"># 晏銘湛箴溫潤設計技能
+
+這是 Ya-MiC 交給支付寶 PAYATHON 2026 **Skill Pay（技能賽道）** 的技能作品。公開賽事頁把 Skill Pay 寫成：為 AI 技能接收款，交付形態是 Skill。這個儲存庫交付的就是那份 Skill：已核准的稟冊 v0.21 外觀，做成一套能裝進代理的視覺文法。它涵蓋簡報 PPTX、文件 DOCX、試算表 XLSX，以及軟體的 UI ...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz-wuwong-ji-wung" target="_blank">ymzz-wuwong-ji-wung</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴_無無即無 — 本地優先知識記憶與子智能體協作 · Tauri 2 + Rust + Vue · MIT</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, .nojekyll, AGENTS.md, Cargo.toml, LICENSE, README.md</summary>
+        <div class="readme-preview"># 晏銘湛箴_無無即無 (wuwong-ji-wung)
+
+&gt; 說出去的話就是潑出去的水。本地優先知識記憶與子智能體協作平台。不撅起用戶本地全部數據，只留使用者主動確認的片段。
+
+- **顯示名稱**：晏銘湛箴_無無即無
+- **GitHub 倉庫**：`ymzz-wuwong-ji-wung`
+- **作者**：晏銘湛箴 (Ya-MiC) — https://github.com/Ya-MiC
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz-wuyong-zhi-yong" target="_blank">ymzz-wuyong-zhi-yong</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴_無用之用 — 本地 MCP 常駐子代理（高權限技能）。三十輻共一轂：Agent 本體是轂（空），skill 是輻（可換）。動態檢測 skills.sh 最被認可的 skill；本地製作過的跨對話 skill；動態監測。DSH 插件。零遙測。MIT。</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, .nojekyll, AGENTS.md, CHANGELOG.md, LICENSE, README.md</summary>
+        <div class="readme-preview"># 晏銘湛箴_無用之用 (wuyong)
+
+&gt; 三十輻共一轂；當其無，有車之用。Agent 本體是轂（空），skill 是輻（可換）。
+&gt; 動態檢測 skills.sh 最被認可的 skill；本地製作過的跨對話 skill；動態監測。
+&gt; 本地 MCP 常駐子代理（高權限技能）· DSH 插件 · 零遙測 · MIT
+
+---
+
+## 什麼是「無用之用」
+
+老子《道德經》：「三十輻共一轂，當其無...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz-zhanzhen" target="_blank">ymzz-zhanzhen</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴 — 支付寶 PAYATHON 2026 Vibe Pay 參賽作品：把人說過的話當作潑出去的水，用量化+標籤注解，與 AI 輸出做星雲匹配。Rust + Tauri v2 + React 18 跨平臺。</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.env.example, .gitattributes, .gitignore, Cargo.lock, Cargo.toml, Dockerfile</summary>
+        <div class="readme-preview"># 晏銘湛箴 (Yanming Zhanzhen)
+
+&gt; 本地優先的結構化第二大腦與原生插件智能體
+&gt; Local-First Structured Second Brain &amp; Native Plugin AI Agent
+
+**晏銘湛箴** — 把人與 AI 說過的話當作「潑出去的水」，用量化分數、標籤、來源索引為每一句做注解，再與 AI 的輸出和思維鏈做星雲匹配。
+
+---
+
+## 這是什麼...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz_gmgn_tgbot_quant" target="_blank">ymzz_gmgn_tgbot_quant</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴_gmgn_tgbot量化策略 — 真實歷史回測、三指標策略與視覺化面板；研究與模擬用途，不保證收益。</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md</summary>
+        <div class="readme-preview"># ymzz_gmgn_tgbot_quant
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz_quant_framework" target="_blank">ymzz_quant_framework</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴 YMZZ 量化研究框架：多策略回測、槓桿≤2x、滑點與止盈止損、真實市場數據（A股/BTC/Polymarket/Solana）與 Telegram 機器人訊號介面 (paper research only).</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, README.md</summary>
+        <div class="readme-preview"># ymzz_quant_framework
+晏銘湛箴 YMZZ 量化研究框架：多策略回測、槓桿≤2x、滑點與止盈止損、真實市場數據（A股/BTC/Polymarket/Solana）與 Telegram 機器人訊號介面 (paper research only).
+...</div>
+      </details>
+    </article>
+    </div>
+    </section>
+    
+    
+    <section class="repo-section" id="audit">
+      <h2>🛡️ zhanzhen / audit-os 審計合規系統（財會 × 审计 AI Agent）</h2>
+      <div class="grid">
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/audit-os" target="_blank">audit-os</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏铭湛箴 Audit OS — 中小企业智能审计与合规平台 MVP：12条审计规则引擎 + 证据SHA-256哈希链 + 可追溯报告</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, ARCHITECTURE.md, README.md, pyproject.toml, requirements.txt</summary>
+        <div class="readme-preview"># 晏铭湛箴 Audit OS（MVP）
+
+&gt; 中小企业智能审计与合规平台 · 第一代命令行版
+&gt; 战略依据：[Ya-MiC/action-tree](https://github.com/Ya-MiC/action-tree) README 第 26/34 节 —— MVP 只做：**上传财务数据 → 质量检查 → 异常识别 → 风险分析 → 可追溯报告**。
+
+---
+
+## 这是什么
+
+一个...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/audit-os-mobile" target="_blank">audit-os-mobile</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">晏铭湛箴审计OS移动端 — 离线12条规则引擎安卓APK骨架(无网络权限)</p>
+      <div class="repo-meta"><span class="chip">JavaScript</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, AndroidManifest.xml, README.md, build.sh, classes.dex</summary>
+        <div class="readme-preview"># 湛箴采集端（Android）— audit-os-mobile v0.5
+
+&gt; 正名「湛箴」；🐙 是吉祥物符号，OZ 仅内部代号。
+&gt; 上游：[action-tree](https://github.com/Ya-MiC/action-tree) ENGINEERING_SPEC §6（客户端规范）。
+
+## 定位（spec §1：Android 只做四件事）
+
+**拍照/相册 → 本地加密队...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen" target="_blank">zhanzhen</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">湛箴 — 中小企业审计风险平台 v1 框架（FastAPI + Vue3，规则引擎本地运行，证据哈希链）</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.env.example, .gitignore, ACKNOWLEDGEMENTS.md, ARCHITECTURE.md, Dockerfile, LICENSE</summary>
+        <div class="readme-preview"># 🐙 湛箴 — 凭证到报告的完整审计作业程序
+
+&lt;!-- 📸 截图占位：v0.3.0 UI 全面改版后的工作台总览图待补（登录横幅 / 五页签按角色显隐 /
+     顶栏报告额度 / 品牌色）。截图就绪后放 docs/screenshots/workbench-v030.png 并取消下一行注释：
+&lt;img src=&quot;docs/screenshots/workbench-v030.png&quot; a...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen--audit-agent-blueprint" target="_blank">zhanzhen--audit-agent-blueprint</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">審計×AI 智能體構想藍圖：基於 GLM-5.3-Flash 與 DeepSeek-V4-Pro-0813 的雙模型架構、四頁面審核工作流、開源技術棧與落地調研</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md</summary>
+        <div class="readme-preview"># Audit Agent Blueprint（審計智能體藍圖）
+
+&gt; 一個服務會計審計行業的 AI 智能體產品構想：原始創意 → 架構設計 → 調研綜述 → 落地路線（中英雙語）
+&gt; An AI-agent product concept for the accounting &amp; audit industry: raw idea → architecture → survey → roadmap...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen-design-system" target="_blank">zhanzhen-design-system</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴設計系統私有倉庫：審美憲章、色系、動效、反饋機制、浮動組件、視覺風格標準</p>
+      <div class="repo-meta"><span class="chip">CSS</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：01-aesthetic-charter.md, 02-color-system.md, 03-animation-feedback.md, 04-visual-style.md, 05-components.md, README.md</summary>
+        <div class="readme-preview"># 晏銘湛箴設計系統（私有）
+
+本倉庫存放晏銘湛箴品牌的審美憲章與設計規範，僅供內部與受權開發者參考。
+
+## 目錄結構
+
+| 文件 | 說明 |
+|------|------|
+| `01-aesthetic-charter.md` | 審美憲章：品牌立場、設計哲學、與大廠 HCI 的區別 |
+| `02-color-system.md` | 色系標準：家族 A/B、四種體系、原色、莫蘭蒂深色、...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen-handover" target="_blank">zhanzhen-handover</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">湛箴业务移交全集 — 业务状态/诉求对照/架构/路径/文档/插件/子agent方法（2026-08）</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：01_BUSINESS_STATE.md, 02_FOUNDER_REQUESTS.md, 03_ARCHITECTURE.md, 04_REPO_MAP.md, 05_DOC_INDEX.md, 06_PLUGIN_MANIFEST.md</summary>
+        <div class="readme-preview"># 🐙 湛箴业务移交全集（Handover）
+
+&gt; 移交日期：2026-08-26 · 整理：ox-alpha (Hermes Agent) · 接收：Ya-MiC 及后续任何 AI/人类协作者
+&gt; **本仓库是湛箴业务的唯一移交入口。从这里的链接能到达一切。**
+
+## 业务一句话
+
+**面向中国全国统一大市场中小企业的审计作业系统**——拍凭证→OCR识别→覆核→账套分录→3+12规则扫描→按...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen-js-obfuscator" target="_blank">zhanzhen-js-obfuscator</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">本地優先 JavaScript 混淆工具（Tauri 2 + Vue 3），全程離線，不上傳代碼。晏銘湛箴第一個商業功能。</p>
+      <div class="repo-meta"><span class="chip">Vue</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, .npmrc, AGENTS.md, LICENSE, README.md, index.html</summary>
+        <div class="readme-preview"># 晏銘湛箴 · JS 混淆器
+
+本地優先的 JavaScript 混淆工具（Tauri 2 + Vue 3），全程離線，不上傳任何代碼。晏銘湛箴第一個商業功能。
+
+## 📥 下載
+
+| 平台 | 文件 | 大小 | 說明 |
+|------|------|------|------|
+| Windows | [zhanzhen-js-obfuscator-v0.1.0.exe](https://...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen-mvp" target="_blank">zhanzhen-mvp</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">湛箴 DSH 插件 MVP：本地优先 Docs/Sheets 编辑与保存面板</p>
+      <div class="repo-meta"><span class="chip">TypeScript</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen-panel" target="_blank">zhanzhen-panel</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">湛箴面板 — 跨端智能文件工作台 + YamiHub 自部署資產面板 · 線上演示見主頁 · fork 後按 deploy/README.md 部署你自己的實例</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.editorconfig, .gitignore, .prettierrc.json, AGENTS.md, CHANGELOG.md, LICENSE</summary>
+        <div class="readme-preview"># 湛箴面板 · ZhanZhen Panel  &gt; **誰連接誰的帳號，面板就長成誰的樣子。** &gt; 一個倉庫，兩個產品：**YamiHub 自部署資產面板**（`deploy/`，可直接部署）+ **湛箴跨端文件工作台**（`apps/`，Vue 3 + Tauri，開發中）。  [![License: GPL-3.0](https://img.shields.io/badge/License...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen-server" target="_blank">zhanzhen-server</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">湛箴 Server - 中小企业审计风险平台后端服务 (FastAPI + PostgreSQL + MinIO + Redis)</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, Dockerfile, Dockerfile.worker, README.md, alembic.ini, check_db.py</summary>
+        <div class="readme-preview"># 湛箴 Server - 中小企業審計風險平台後端服務
+
+&gt; FastAPI + PostgreSQL + MinIO + Redis 微服務架構
+&gt; 遵循 [工程規範](https://github.com/Ya-MiC/action-tree/blob/main/docs/ENGINEERING_SPEC.md) 與 [規格文件](https://github.com/Ya-MiC/acti...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/zhanzhen-web" target="_blank">zhanzhen-web</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">湛箴网页版 - CF Pages 静态前端 / ZhanZhen web frontend for Cloudflare Pages</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, README.md, _headers, index.html</summary>
+        <div class="readme-preview"># 湛箴网页版（CF Pages 静态前端）
+
+纯静态单页应用，连你自己的湛箴 API 服务器。**部署到 Cloudflare Pages 零配置**。
+
+## Cloudflare Pages 部署（1 分钟）
+
+1. CF Dashboard → Workers &amp; Pages → Create → **Pages → Connect to Git**
+2. 选这个仓库 `zhanzhen-...</div>
+      </details>
+    </article>
+    </div>
+    </section>
+    
+    
+    <section class="repo-section" id="dsh">
+      <h2>🤖 DSH / 技能生態與自動化（AI Agent 技能與治理）</h2>
+      <div class="grid">
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/action-tree" target="_blank">action-tree</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">晏銘湛箴 · 中小企業智能審計與合規基礎設施 — 戰略總綱與工程文檔（用戶親筆根節點）</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：BRIEFING.md, CURRENT_STATE.md, INDEX.md, LICENSE, README.md</summary>
+        <div class="readme-preview">你要考虑到中国。 那个中国目前市场最优秀的一点就是。 全国统一大市场的战略。这个是中国少数。 的客观的理财与全世界的优势。 这也是我想做的，就是面向于中小企业。因为你全国统一大市场不可能是一个大企业，也不可能。 全都是零散的个人，个体工商户。大多数全都是中小企业，而这些中小企业的审计由于全国大市场、全国大市场，它必须得有一个统一的审计的一个软件。这个东西就是。 目前没有做。然后像这些金蝶拥有Man...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/basedblocks-keepalive" target="_blank">basedblocks-keepalive</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">basedblocks.xyz-自动网页保活</p>
+      <div class="repo-meta"><span class="chip">⭐ 1</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：&quot;image.png-程序运行保活示例-eg.console&quot;, LICENSE, README.md, console.txt, image.png-输入allow pasting预览, photo.01-deletecookies</summary>
+        <div class="readme-preview"># basedblocks-keepalive 🛡️
+
+**持续挖矿，随时在线！** 🚀  
+**Keep mining alive, uninterrupted!** 💎
+
+本脚本为**纯前端注入**工具，专为 **basedblocks.xyz**（Base Network）设计。当挖矿过程检测到卡顿或有效哈希时，自动在“停止挖矿”🔴与“开始挖矿”🟢按钮之间切换，保障挖矿持续运行。⛏️  
+
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/dsh" target="_blank">dsh</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">中央技能與規範庫 — 所有 AI 工具（DSH/Claude Code/Codex/QClaw/WorkBuddy）的唯一技能真相源，只在 GitHub 編輯、本機僅同步。</p>
+      <div class="repo-meta"><span class="chip">Shell</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md, ROOT.md, commercialization-strategy.md</summary>
+        <div class="readme-preview"># dsh-skills · 中央技能與規範庫
+
+Ya-MiC 全部 AI 工具（DeepSeek Harness / Claude Code / Codex / QClaw / WorkBuddy…）的**唯一技能真相源**。
+
+&gt; 鐵則：本倉庫一律在 GitHub 上編輯；本機只保留 git 同步克隆與目錄聯接。
+
+## 結構
+
+| 路徑 | 用途 |
+|---|---|
+| `ROOT.md...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/hermes" target="_blank">hermes</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">Ya-MiC GitHub 全景索引 / Curated index of Ya-MiC&#x27;s repos &amp; stars — DeepSeek Harness (DSH) compliant, multilingual, multi-branch</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：PLUGIN_ROADMAP.md, README.md, README.zh.md, SYSTEM.md, cordis.yml</summary>
+        <div class="readme-preview"># Hermes — Ya-MiC&#x27;s GitHub Index
+
+&gt; A curated, **DeepSeek Harness (DSH)-compliant** index of all repositories owned, forked and starred by [Ya-MiC](https://github.com/Ya-MiC).
+&gt; Every entry is real da...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/invoice-ocr-system" target="_blank">invoice-ocr-system</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">Invoice &amp; ledger OCR automation - Python + Rust</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, ACKNOWLEDGMENTS.md, ARCHITECTURE.md, Cargo.toml, Dockerfile, LICENSE</summary>
+        <div class="readme-preview"># 发票/账本自动化OCR处理系统
+
+基于 RapidOCR + Rust 高性能文件监听的发票OCR自动化处理系统。
+
+## 架构确认
+
+### 选型理由
+| 组件 | 选型 | 协议 | 商用限制 |
+|------|------|------|----------|
+| OCR引擎 | RapidOCR | Apache-2.0 | 无限制 |
+| 文件监听 | Rust (notify) ...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/nv-automation" target="_blank">nv-automation</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md</summary>
+        <div class="readme-preview"># nv-automation
+
+每天 06:00（首爾時間）GitHub Actions 自動測試 NVIDIA NIM 全部模型，分類並寫入 `catalog/`，再開一個「每日模型報告」Issue（標籤 `待審批`、指派給你），GitHub 會把通知寄到你帳號的郵箱。不經過 Grok Bot。
+Daily at 06:00 KST, GitHub Actions probes every N...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/openclaw-kugua-state" target="_blank">openclaw-kugua-state</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">苦瓜 Agent 完整状态记录 - 配置、记忆机制、心跳、技能、定时任务</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：01-system-config.md, 02-memory-system.md, 03-heartbeat.md, 04-skills.md, 05-cron-jobs.md, 06-gateway.md</summary>
+        <div class="readme-preview"># 🦞 苦瓜 Agent 完整状态记录
+
+&gt; 本仓库记录了 OpenClaw 苦瓜 Agent 的完整配置、状态、记忆机制、心跳检查、技能和定时任务。  
+&gt; 可用于迁移、复现或参考。
+
+---
+
+## 📁 目录结构
+
+```
+openclaw-kugua-state/
+├── README.md              # 本文件
+├── 01-system-config.md    # 系统...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/openclaw-longxia" target="_blank">openclaw-longxia</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">苦瓜 Agent 迁移状态，用于龙虾</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：AGENTS.md, HEARTBEAT.md, IDENTITY.md, MEMORY.md, SOUL.md, TOOLS.md</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ya-mic-os" target="_blank">ya-mic-os</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">Ya-MiC 總控作業系統：59+ 倉庫資產治理面板 · 動態評分 · 裁決自動化 · 可視化地圖（Skill 3.0）</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, .netlifyignore, LICENSE, README.md, gallery.html, guide.html</summary>
+        <div class="readme-preview"># 🐙 Ya-MiC Portfolio OS
+
+&gt; **GitHub 資產治理作業系統 · 59 個倉庫的單一真相源**
+&gt; Skill 3.0 · RUN-2026-08-28-001 · 部署於 GitHub Pages
+
+把 59 個 GitHub 倉庫、forks 變成「可理解、可評估、可決策、可治理、可複利」的資產組合。
+不是 repository 列表，是一套有評分、有閘門、有 DD...</div>
+      </details>
+    </article>
+    </div>
+    </section>
+    
+    
+    <section class="repo-section" id="tools">
+      <h2>🔧 工具與實驗倉庫（小工具、測試、個人項目）</h2>
+      <div class="grid">
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/-" target="_blank">-</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md</summary>
+        <div class="readme-preview">1
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/-GL.iNet-OpenWrt-DNS-" target="_blank">-GL.iNet-OpenWrt-DNS-</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc"># GL.iNet / OpenWrt 上游 DNS 锁定 &amp; 链路检测工具</p>
+      <div class="repo-meta"><span class="chip">Shell</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, README.md, README.md 文档.docx, dns_chain_inspect.sh, dns_lock_upstream.sh, dnsupstreamlock</summary>
+        <div class="readme-preview"># GL.iNet / OpenWrt 上游 DNS 锁定 &amp; 链路检测工具
+
+&gt; 适用场景：经常出差或连入陌生网络时，防止上游强行指定 DNS、保障通过加密 DNS 服务解析域名。
+
+本项目包含 3 个脚本（+1 个 README）：
+
+1. `dns_lock_upstream.sh`  
+   - 自动扫描所有 **上游接口**（`dhcp/dhcpv6/pppoe/ncm/qmi/mbim...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/123" target="_blank">123</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/JunbaoCao/E-" target="_blank">E-</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Excel-Randomization-Process" target="_blank">Excel-Randomization-Process</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md, ban.html</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Global-Identity-Planning" target="_blank">Global-Identity-Planning</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md, 战略对比&quot;什么是核心价值(资产)&quot;</summary>
+        <div class="readme-preview">**📘 全球护照 + 身份 + 签证使用手册**葡萄牙+新西蘭
+*适用于2006年出生、持中国护照，目标实现中国护照 
+
+---
+
+### 🧭 一、背景简介：AI时代、学历贬值与身份自由的战略转型
+
+21世纪20年代初，人工智能与全球去中心化浪潮正在加速重塑劳动力市场与社会结构。学历正逐步从“刚需通行证”退化为“结构化标签”，而身份——包括护照、居留卡与合法纳税记录——正上升为核心资产。
+
+在中国...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/IP-KR" target="_blank">IP-KR</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">Seoul</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md</summary>
+        <div class="readme-preview">## FOFA 搜索：韩国首尔 SK 宽带 (ASN9318) 443 端口
+
+下面展示了三组针对韩国首尔地区 SK 宽带公司（ASN9318）443 端口的 FOFA 查询指令，分别为：
+
+1. 🔧 **通用过滤示例**（放在最上方）
+2. 🏠 **优选 IP（原生住宅 IP）**
+3. 🛡️ **Proxy 反代 IP**
+
+所有命令保持原始格式，并针对每一行指令在其下方以小字形式添加动机与含...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Projects" target="_blank">Projects</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitattributes, LICENSE, README.md</summary>
+        <div class="readme-preview"># Projects
+
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Secure-Edge-Access-Implementation-via-Cloudflare-Tunnel-Zero-Trust-" target="_blank">Secure-Edge-Access-Implementation-via-Cloudflare-Tunnel-Zero-Trust-</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">Date: January 19, 2026 Author: [Your Name/Username] Status: Phase 1 Completed (Router), Phase 2 Pending (Debian VPS)</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, README.md</summary>
+        <div class="readme-preview">
+
+# Cloudflare Zero Trust 网络访问 (ZTNA) 实施方案
+
+![项目状态](https://img.shields.io/badge/状态-第一阶段%20完成-success)
+![支持平台](https://img.shields.io/badge/平台-OpenWrt%20%7C%20Debian-blue)
+![中间件](https://img.shields.i...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Ya-MIC-bbr" target="_blank">Ya-MIC-bbr</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, 20250422_项目运行代码.txt, LICENSE, README.md, bash_20250422.sh, bash_20250422_报错修改sh</summary>
+        <div class="readme-preview">
+
+# **BBR (Bottleneck Bandwidth and Round-trip) Optimization Guide**  
+*A high-performance TCP congestion control algorithm for Linux*  
+
+![BBR Logo](https://img.shields.io/badge/BBR-Optimized-green) ...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Yamic" target="_blank">Yamic</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, Pasted image 20260922161150.png, Pasted image 20260922174342.png, Pasted image 20260922182030.png, zhanzhen_workflow_and_visual_system_v1.md, 晏銘湛箴.md</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/a" target="_blank">a</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitattributes, LICENSE, README.md</summary>
+        <div class="readme-preview"># a
+
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/economics-11.29" target="_blank">economics-11.29</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">经济学-11.29马尔萨斯</p>
+      <div class="repo-meta"><span class="chip">TypeScript</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, App.tsx, README.md, constants.tsx, index.html, index.tsx</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/fofa-" target="_blank">fofa-</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, README.md</summary>
+        <div class="readme-preview">下面给出一条专门用来搜索「既是家庭宽带 IP（Residential ISP），又通过 Cloudflare 反向代理」的 FOFA 语句示例，你可以按此格式替换国家和运营商名称／ASN 使用：
+
+```plaintext
+header=&quot;cloudflare&quot; &amp;&amp; country=&quot;KR&quot; &amp;&amp; isp=&quot;SK Broadband Co Ltd&quot; &amp;&amp; status_code=&quot;403&quot;
+``...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/for-love" target="_blank">for-love</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, aixin0.1.html, blue.html</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/hermes-private" target="_blank">hermes-private</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">Personal migration planning — PRIVATE. Identity strategy, country shortlist, timeline.</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md, advisor-file.md, country-shortlist.md, nz-landing-playbook.md</summary>
+        <div class="readme-preview"># 🔒 hermes-private
+
+個人身份/移民規劃私庫。**不公開、不含代碼。**
+
+## 目錄
+- [advisor-file.md](./advisor-file.md) — **⭐ 顧問檔案+行動樹根節點（Agent 復活必讀）**
+- [country-shortlist.md](./country-shortlist.md) — 國家推薦報告（基於 Henley 2026 + 個...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/my-report-site" target="_blank">my-report-site</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"><span class="chip">HTML</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md, echarts.min.js, index.html, report-a.html, report-b.html</summary>
+        <div class="readme-preview"># my-report-site...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/pi-nim-conversations" target="_blank">pi-nim-conversations</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">Pi coding assistant + NVIDIA NIM integration with AI conversation markdown logs</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, README.md, nim_models_dashboard.html, nim_toolkit.py, nvidia_all_models.json, nvidia_models_categorized.json</summary>
+        <div class="readme-preview"># NVIDIA NIM + Pi AI Setup
+
+This repository stores AI conversation logs (markdown) and NVIDIA NIM integration tools for the Pi coding assistant.
+
+## Setup Summary
+
+### Pi Installation
+- `pi` and `pi-n...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/q" target="_blank">q</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">[不明] 無說明 4KB,單字符測試</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/warp-" target="_blank">warp-</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md</summary>
+        <div class="readme-preview">import urllib.request
+import json
+import datetime
+import random
+import string
+import time
+import os
+import sys
+os.system(&quot;title WARP-PLUS-CLOUDFLARE By ALIILAPRO&quot;)
+os.system(&#x27;cls&#x27; if os.name == &#x27;nt&#x27; e...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/who-am-i-yamic" target="_blank">who-am-i-yamic</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"><span class="chip">Python</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md, Who-Am-I-YAMIC-Complete-Project-v1.0.0.zip</summary>
+        <div class="readme-preview"># who-am-i-yamic...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ya-mic-growth-log" target="_blank">ya-mic-growth-log</a></h3>
+        <div class="badges"></div>
+      </div>
+      <p class="repo-desc">Ya-MiC 的 Agent Skills 收藏庫：資產治理、GitHub Portfolio OS、投資委員會 Skill</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：GitHub 資產投資委員會-github整理skill.txt, README.md, github-asset-governance-os-skill.md, 通用 GitHub Portfolio OS-github通用整理skill.txt</summary>
+        <div class="readme-preview"># ya-mic-agent-skills
+Ya-MiC 的 Agent Skills 收藏庫：資產治理、GitHub Portfolio OS、投資委員會 Skill
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/yamic188" target="_blank">yamic188</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：_worker.js, origin.js</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/yanming" target="_blank">yanming</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">逐步移民计划</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：***新西兰奥克兰AUT+永居（PR）.md, README.md, zongjie.md, 逐步移民计划.md</summary>
+        <div class="readme-preview"># 中国籍学生通过新西兰Level 7路径获取新西兰与加拿大护照的完整规划
+
+&gt; 作者：GPT助理
+&gt; 
+&gt; 
+&gt; 日期：2025年5月
+&gt; 
+&gt; 对象：出生于2006年的中国护照持有者（目前18–19岁）
+&gt; 
+
+---
+
+## 📌 总目标概览
+
+- 第一步：通过新西兰Level 7课程移民，最终获取新西兰护照（约5年）
+- 第二步：凭新西兰护照，申请加拿大 IEC/学签 → PR → 加拿大护...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/yanming-cao" target="_blank">yanming-cao</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/yanming-global-intelligence-system" target="_blank">yanming-global-intelligence-system</a></h3>
+        <div class="badges"><span class="badge private">🔒 私有</span></div>
+      </div>
+      <p class="repo-desc">Yamic Global Intelligence System — global research &amp; delivery framework</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, AGENTS.md, CONTRIBUTING.md, LICENSE, README.md</summary>
+        <div class="readme-preview"># YanMing Global Intelligence System / Yamic全球研究、批判论证与规范交付系统
+
+&gt; **全球信息研究—判断—交付操作系统**
+&gt; A Global Information Research — Judgment — Delivery Operating System
+
+---
+
+## 目录 / Table of Contents
+
+- [系统概述 / O...</div>
+      </details>
+    </article>
+    </div>
+    </section>
+    
+    <section class="repo-section" id="forks">
+      <h2>🍴 Fork 外部系（參考與依賴，共 37 個，不納入品牌對齊）</h2>
+      <div class="grid">
+        
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/BPB-Worker-Panel" target="_blank">BPB-Worker-Panel</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">A GUI Panel providing Worker subscriptions and Fragment settings and Warp configs, providing configs for cross-platform clients using (singbox-core and xray-core)</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, CDN优选域名V23.8.18(电脑win64).exe, CF优选反代IP(电脑版).zip, LICENSE, README.md, README_fa.md</summary>
+        <div class="readme-preview">&lt;h1 align=&quot;center&quot;&gt;💦 BPB Panel&lt;/h1&gt;
+
+### 🌏 Readme in [Farsi](README_fa.md)
+
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;docs/assets/images/Panel.jpg&quot;&gt;
+&lt;/p&gt;
+&lt;br&gt;
+
+## Introduction
+This project is dedicated to develo...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/CF-Workers-SUB" target="_blank">CF-Workers-SUB</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">这个是一个通过 Cloudflare Workers 搭建，将你任意节点与多个订阅汇聚成专属于你的订阅链接</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, README.md, _worker.js, sub.png</summary>
+        <div class="readme-preview"># ⚙ 自建汇聚订阅 CF-Workers-SUB
+
+![自建汇聚订阅 CF-Workers-SUB](./sub.png)
+
+这是一个将多个节点和订阅合并为单一链接的工具，支持自动适配与自定义分流，简化了订阅管理。
+
+&gt; [!CAUTION]
+&gt; **汇聚订阅非base64订阅时**，会自动生成一个**有效期为24小时的临时订阅**，并提交给**订阅转换后端**来完成订阅转换，可避免您的汇聚订阅...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/CFBox" target="_blank">CFBox</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">一个运行在 Cloudflare Workers 上兼容CFnew 与edgetunnel的代理订阅管理面板——既能在 /UUID 路径上输出 VLESS/Trojan/xhttp 多协议订阅，又提供图形化配置界面（KV 存储、改完即生效），并内置延迟测试、流媒体/AI 连通性检测、多客户端订阅生成、多语言等能力。</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：CFBox Pages混淆版.zip, CFBox明文版.js, CFBox混淆版.js, English.md, README.md, فارسی.md</summary>
+        <div class="readme-preview"># CFBox 订阅管理器
+
+&gt; **切换语言**  [简体中文](README.md)  [English](English.md)  [فارسی](فارسی.md)
+
+&gt; **运行在 Cloudflare Workers / Pages 上的代理订阅管理面板**——融合 CFnew 与 edgetunnel（cmliu）双方能力，既能在 `/UUID`（或自定义路径）上输出 VLESS /...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/DeepTutor" target="_blank">DeepTutor</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">DeepTutor: Lifelong Personalized Tutoring. https://deeptutor.info/.</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.dockerignore, .env.example, .gitattributes, .gitignore, .importlinter, .pre-commit-config.yaml</summary>
+        <div class="readme-preview">&lt;div align=&quot;center&quot;&gt;
+
+&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;assets/figs/logo/logo.png&quot; alt=&quot;DeepTutor logo&quot; height=&quot;56&quot; style=&quot;vertical-align: middle;&quot;&gt;&amp;nbsp;&lt;img src=&quot;assets/figs/logo/banner.png&quot; alt=&quot;DeepTuto...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/FinceptTerminal" target="_blank">FinceptTerminal</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview"># Fincept Terminal
+
+&lt;div align=&quot;center&quot;&gt;
+
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-C06524)](https://github.com/Fincept-Corporation/FinceptTerminal/blob/main/LICENSE)
+[![C++...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/HowToLiveBetter" target="_blank">HowToLiveBetter</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">高性价比人生指南: 长寿防病、急救、省钱理财、法律红线、失业与工伤、医保社保、恋爱婚育、怀孕育儿、创业与做平台合规、出国与技能。每条写明成本、收益、证据等级和原始出处，只引期刊论文与官方文件。</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, .nojekyll, AGENTS.md, CLAUDE.md, LICENSE, LICENSE-CODE</summary>
+        <div class="readme-preview">&lt;div align=&quot;center&quot;&gt;
+
+&lt;img src=&quot;og.png&quot; alt=&quot;高性价比人生指南 —— 用最少的钱、时间和精力，换回最多的寿命、金钱和人身自由&quot; width=&quot;820&quot;&gt;
+
+# 高性价比人生指南
+
+讲怎么活得久、怎么少生病，出了意外怎么救。讲怎么少花冤枉钱，哪些事会让人被骗、摊上官司。讲没工作没钱时能去领什么，开店、开公司、做网站要办什么手续。也讲恋爱结婚生孩子、出国和学...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Invoice-Downloader" target="_blank">Invoice-Downloader</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">电子发票整理与报销准备工具：从邮箱批量收集 PDF/OFD/XML 发票，OCR 识别、分类归档并生成 Excel 汇总；提供 Windows/macOS 桌面版与 DSH 插件。</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, AGENTS.md, LICENSE, NOTICE, README.en.md, README.md</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/MarkWrite" target="_blank">MarkWrite</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">周槺_本地 桌面 Markdown 书写器，基于可以AI助手 做辅助修改</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, README.md, config.json, index.html, main.js, markwrite.tw.css</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/Microsoft" target="_blank">Microsoft</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">[RISK] Microsoft Activation Scripts (MAS) fork from massgrave/dev,個人備用,1★。有 license/DMCA 法律風險,因 upstream 禁止改可見性,僅用 description + topics 標示風險。</p>
+      <div class="repo-meta"><span class="chip">⭐ 1</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitattributes, LICENSE, README.md</summary>
+        <div class="readme-preview">&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;https://massgrave.dev/img/logo_small.png&quot; alt=&quot;MAS Logo&quot;&gt;&lt;/p&gt;
+
+&lt;h1 align=&quot;center&quot;&gt;Microsoft  Activation  Scripts (MAS)&lt;/h1&gt;
+
+&lt;p align=&quot;center&quot;&gt;Open-source Windows and O...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/OpenStock" target="_blank">OpenStock</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">OpenStock is an open-source alternative to expensive market platforms. Track real-time prices, set personalized alerts, and explore detailed company insights — built openly, for everyone, forever free.</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, API_DOCS.md, Dockerfile, LICENSE, MARKET_SUPPORT.md, README.md</summary>
+        <div class="readme-preview">
+&lt;a href=&quot;https://trendshift.io/repositories/15728?utm_source=repository-badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=badge-repository-15728&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;img src=&quot;https:/...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ai_quant_trade_needchange" target="_blank">ai_quant_trade_needchange</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">股票AI操盘手：从学习、模拟到实盘，一站式平台。包含股票知识、策略实例、大模型、因子挖掘、传统策略、机器学习、深度学习、强化学习、图网络、高频交易、C++部署和聚宽实例代码等，可以方便学习、模拟及实盘交易</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">&lt;div align=&quot;center&quot;&gt;
+
+&lt;img src=&quot;.README_images/LOGO_NEW.png&quot; width=&quot;260&quot; height=&quot;270&quot; alt=&quot;AI量化交易操盘手&quot; /&gt;
+
+# 🤖 AI量化交易操盘手
+
+**一站式AI量化交易平台 · 从学习、模拟到实盘**
+
+[**ENGLISH VERSION**](https://github.com/charliedr...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/archify" target="_blank">archify</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">&lt;p align=&quot;center&quot;&gt;
+  &lt;strong&gt;English&lt;/strong&gt; · &lt;a href=&quot;./README_ZH.md&quot;&gt;简体中文&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+  &lt;a href=&quot;https://trendshift.io/repositories/31352?utm_source=repository-badge&amp;amp;utm_mediu...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/argo" target="_blank">argo</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">专门为 agent 打造的 agent 搜索工具，具备多语言搜索能力，覆盖中文/英文/学术/代码/购物/金融/新闻/百科。</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, .npmignore, LICENSE, README.en.md, README.es.md, README.ja.md</summary>
+        <div class="readme-preview">&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;assets/readme/hero.svg&quot; width=&quot;100%&quot; alt=&quot;Argo 阿尔戈：给 Agent 用的统一搜索与证据核验&quot;&gt;
+&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+  &lt;strong&gt;中文&lt;/strong&gt; ·
+  &lt;a href=&quot;README.en.md&quot;&gt;English&lt;/a&gt; ·
+  &lt;a hre...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/awesome-dsh-plugin" target="_blank">awesome-dsh-plugin</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview"># Awesome DeepSeek Harness (DSH) Plugin [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) ![awesome · DSH plugin](https://awesome-dsh-plugin.com/badge.svg) ![plugin count](https://img.shi...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/awesome-systematic-trading" target="_blank">awesome-systematic-trading</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">A curated list of insanely awesome libraries, packages and resources for systematic trading. Crypto, Stock, Futures, Options, CFDs, FX, and more | 量化交易 | 量化投资</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview"># Awesome Systematic Trading
+
+&gt; or Quantitative Trading + a bit data science infra
+
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+![GitHub last commit (branch)](https://img.shields.io...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/dingyuebaohu" target="_blank">dingyuebaohu</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">自动化批量替换生成优选线路 VMess / VLESS / Trojan 节点的 优选订阅生成器</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：CloudflareSpeedTest.csv, LICENSE, README-FA.md, README.md, _worker.js, addressesapi.txt</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/docformat-gui" target="_blank">docformat-gui</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">公文格式自动处理工具（可本地运行）</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview"># Document Format GUI (公文格式处理工具)
+
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;assets/imageforgithub.png&quot; alt=&quot;公文格式助手横幅&quot; width=&quot;100%&quot;&gt;
+&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+  &lt;strong&gt;一键修复 Word 文档格式，让排版不再头疼。&lt;/strong&gt;
+&lt;/p&gt;
+
+&lt;p al...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/dsh-sidebar-qa" target="_blank">dsh-sidebar-qa</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">一个基于DSH-better-sidebar的侧边栏提问tab，实现类codex的侧边提问或claude code的/btw功能|原作者：https://github.com/ChenRuoT/dsh-sidebar-qa/fork</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitattributes, .gitignore, CHANGELOG.md, LICENSE, README.md, README_EN.md</summary>
+        <div class="readme-preview"># dsh-sidebar-qa
+
+&lt;!-- Hero --&gt;
+&lt;div align=&quot;center&quot;&gt;
+  &lt;b style=&quot;font-size: 1.15em;&quot;&gt;划选即问，侧边栏内嵌问答&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+  &lt;code&gt;划选提问&lt;/code&gt; &lt;code&gt;添加到对话&lt;/code&gt; &lt;code&gt;上下文摘要&lt;/code&gt; &lt;code&gt;嵌套追问&lt;/code&gt; &lt;code&gt;追问记录...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/dsh-stock-watch" target="_blank">dsh-stock-watch</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">A股自选股实时行情盯盘插件 - DeepSeek Harness Web 右上角可折叠弹窗</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">&lt;h1 align=&quot;center&quot;&gt;dsh-stock-watch&lt;/h1&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;a href=&quot;https://awesome-dsh-plugin.com&quot;&gt;&lt;img src=&quot;https://awesome-dsh-plugin.com/badge.svg&quot; alt=&quot;Awesome DSH Plugin&quot;&gt;&lt;/a&gt;
+  &lt;a href=&quot;https...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/last30days-skill" target="_blank">last30days-skill</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.clawhubignore, .gitattributes, .gitignore, .skillignore, AGENTS.md, CHANGELOG.md</summary>
+        <div class="readme-preview"># /last30days
+
+English | [Français](README.fr.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Português (Brasil)](README.pt-BR.md) | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
+
+&lt;p align=...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/modern-web-guidance" target="_blank">modern-web-guidance</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">Keep your coding agent up to date with the latest web best practices</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, CONTRIBUTING.md, LICENSE, README.md, gemini-extension.json, kimi.plugin.json</summary>
+        <div class="readme-preview">&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;https://github.com/GoogleChrome/modern-web-guidance/raw/main/.github/img/modern-web-guidance.svg&quot; alt=&quot;Modern Web Guidance Logo&quot; width=&quot;150&quot; /&gt;
+&lt;/p&gt;
+
+# Modern Web Guidan...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/nautilus_trader" target="_blank">nautilus_trader</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">Production-grade Rust-native trading engine with deterministic event-driven architecture</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.codecov.yml, .codespellrc, .dockerignore, .env.example, .gitattributes, .gitignore</summary>
+        <div class="readme-preview">無 README...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/nie-grassroots-logic" target="_blank">nie-grassroots-logic</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">聂·基层运行逻辑 · Agent Skill：基于聂辉华《基层中国的运行逻辑》的方法论工具箱（不含原书全文）</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：—</summary>
+        <div class="readme-preview">&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;cover.png&quot; alt=&quot;基层中国的运行逻辑 · 可执行 AI Skill&quot; width=&quot;100%&quot; /&gt;
+&lt;/p&gt;
+
+# 基层中国的运行逻辑
+
+**聂辉华同名著作的可执行 AI Skill**
+
+把县乡村治理框架（条块、含权量、双均衡、三座大山…）提炼成可被 **Cursor / Claude Code / Codex / G...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/open-design" target="_blank">open-design</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images &amp; video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode &amp; 20+ CLIs via BYOK.</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.dockerignore, .gitattributes, .gitignore, .ignore, .node-version, AGENTS.md</summary>
+        <div class="readme-preview">&lt;h1 align=&quot;center&quot;&gt;OpenDesign: The open-source Claude Design alternative&lt;/h1&gt;
+
+&gt; ⚡ **[OpenDesign Cloud — the official model service.](https://open-design.ai/zh/pricing/)** One recharge to use both age...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/openclawctljingxiang" target="_blank">openclawctljingxiang</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">myopenclaw+OpenClaw 启用 QMD 记忆后端：混合检索（BM25+向量）与重排落地指南+三省六部 · Edict</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：README.md, openclaw.ps1, openclaw.sh</summary>
+        <div class="readme-preview"># OpenClaw CTL
+
+OpenClaw CTL / MoltBot 的管理脚本，把常用操作都包进了一个交互式菜单里，省得每次手打命令。
+
+支持 macOS（Intel / Apple Silicon）、主流 Linux 发行版和 Windows 11。
+
+作者：Joey  
+YouTube：[@joeyblog](https://youtube.com/@joeyblog)  
+Tele...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/osiris" target="_blank">osiris</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">Open Source Global Intelligence Platform - Real-Time OSINT Dashboard - A Palantir Alternative -                            2nZNHm3Lr9umG3DVrzYwHgktwkuKuJRXqqRqs3ewpump </p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.dockerignore, .env.example, .gitignore, DOCKER.md, Dockerfile, LICENSE</summary>
+        <div class="readme-preview">&lt;div align=&quot;center&quot;&gt;
+
+# ⬡ OSIRIS
+
+### Open Source Intelligence &amp; Reconnaissance Integrated System
+
+[![Live Demo](https://img.shields.io/badge/osirisai.live-00E5FF?style=for-the-badge&amp;logo=vercel&amp;logoC...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/proxy-github" target="_blank">proxy-github</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">解决一些访问限制和加速访问的问题。</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE, README.md, _worker.js, img.png</summary>
+        <div class="readme-preview"># CF-Workers-GitHub
+![img](./img.png)
+## 简介
+github release、archive以及项目文件的加速项目，支持clone，Cloudflare Workers &amp; Pages 版本
+
+## 使用
+
+直接在copy出来的url前加`https://Github.cmliussss.net/`即可
+
+也可以直接访问，在input输入
+...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/serv00-play" target="_blank">serv00-play</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">serv00/hostuno 上的一些应用，包括argo+vmess/vmess+ws/hy2/socks5/mtproto/alist/哪吒探针|面板 等, 自动化部署、批量保号、进程防杀、消息推送</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, LICENSE, README.md, keepalive.sh, mkprofile.pl, revive.sh</summary>
+        <div class="readme-preview"># serv00/hostuno 上的一些应用，包括 argo+vmess/vmess+ws/hy2/socks5/mtproto/alist/哪吒探针|面板/sun-panel/webssh 等, 自动化部署、批量保号、进程防杀、消息推送
+
+💖 如果你在用这个项目，请给我打个 star，好让我知道有多少人从这个项目中受益。
+
+## 前置工作
+
+1. 你需要有一个 serv00/hos...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/sublink-worker" target="_blank">sublink-worker</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">无需服务器，一键部署，快速使用自建节点分享URL进行订阅转换，提供灵活的自定义选项，支持SingBox/Clash/V2Ray/Xray</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, LICENSE, README.md, index.js, package.json, pnpm-lock.yaml</summary>
+        <div class="readme-preview">&lt;div align=&quot;center&quot;&gt;
+  &lt;h1&gt;&lt;b&gt;Sublink Worker&lt;/b&gt;&lt;/h1&gt;
+  &lt;h5&gt;&lt;i&gt;Serverless 自部署订阅转换工具最佳实践&lt;/i&gt;&lt;/h5&gt;
+  
+  &lt;a href=&quot;https://trendshift.io/repositories/12291&quot; target=&quot;_blank&quot;&gt;
+    &lt;img src=&quot;https://trendshi...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/the-book-of-secret-knowledge" target="_blank">the-book-of-secret-knowledge</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools and more.</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：LICENSE.md, README.md</summary>
+        <div class="readme-preview">&lt;p align=&quot;center&quot;&gt;
+  &lt;a href=&quot;https://github.com/trimstray/the-book-of-secret-knowledge&quot;&gt;
+    &lt;img src=&quot;https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-sec...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/trading-second-brain_needchange" target="_blank">trading-second-brain_needchange</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, AGENT_WORKFLOW.md, CLAUDE.md, LEARNINGS.md, MEMORY.md, README.ja.md</summary>
+        <div class="readme-preview">&lt;div align=&quot;center&quot;&gt;
+
+# 🧠 Trading Second Brain
+
+### Turn every chart, trade, mistake, PDF, slide, and handwritten note into reusable trading memory.
+
+A multimodal, agent-friendly knowledge system for ...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/tv" target="_blank">tv</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">一个开箱即用的、跨平台的影视聚合播放站。</p>
+      <div class="repo-meta"><span class="chip">TypeScript</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.dockerignore, .eslintrc.js, .gitignore, .npmrc, .nvmrc, .prettierignore</summary>
+        <div class="readme-preview"># MoonTV
+
+&lt;div align=&quot;center&quot;&gt;
+  &lt;img src=&quot;public/logo.png&quot; alt=&quot;LibreTV Logo&quot; width=&quot;120&quot;&gt;
+&lt;/div&gt;
+
+&gt; 🎬 **MoonTV** 是一个开箱即用的、跨平台的影视聚合播放器。它基于 **Next.js 14** + **Tailwind&amp;nbsp;CSS** + **TypeScript** 构建，支...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/vibe-coding-cn" target="_blank">vibe-coding-cn</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">無描述</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, AGENTS.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, Makefile</summary>
+        <div class="readme-preview">&lt;!--
+-------------------------------------------------------------------------------
+  项目头部区域 (HEADER)
+-------------------------------------------------------------------------------
+--&gt;
+&lt;p align=&quot;cen...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/winutil" target="_blank">winutil</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">window</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitattributes, .gitignore, Compile.ps1, LICENSE, README.md, sign.bat</summary>
+        <div class="readme-preview"># Chris Titus Tech&#x27;s Windows Utility
+
+[![Version](https://img.shields.io/github/v/release/ChrisTitusTech/winutil?color=%230567ff&amp;label=Latest%20Release&amp;style=for-the-badge)](https://github.com/ChrisTi...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz" target="_blank">ymzz</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">湛箴_ymzz — 基於 DeepSeek Harness 的本地優先智能體</p>
+      <div class="repo-meta"><span class="chip">TypeScript</span></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.editorconfig, .gitattributes, .gitignore, .gitlab-ci.yml, .jscpd.json, .oxlintrc.json</summary>
+        <div class="readme-preview"># 湛箴_ymzz
+
+&lt;img src=&quot;ymzz/branding/generated/preview-512.png&quot; width=&quot;88&quot; alt=&quot;Owner-supplied 湛箴_ymzz product icon&quot;&gt;
+
+**The complete DeepSeek Harness application, with a small native ymzz plugin extens...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz_t3code-vnpy" target="_blank">ymzz_t3code-vnpy</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">The  way to control Claude Code, Codex and more from any computer or phone</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.coderabbit.config.ts, .env.example, .gitattributes, .gitignore, .pnpmfile.cjs, .task-cache.json</summary>
+        <div class="readme-preview">&lt;p align=&quot;center&quot;&gt;
+  &lt;a href=&quot;https://t3.codes&quot;&gt;
+    &lt;img src=&quot;./assets/prod/t3-black-web-icon-192x192.png&quot; width=&quot;80&quot; height=&quot;80&quot; alt=&quot;T3 Code logo&quot; /&gt;
+  &lt;/a&gt;
+&lt;/p&gt;
+
+&lt;h1 align=&quot;center&quot;&gt;T3 Code&lt;/h1&gt;
+
+&lt;...</div>
+      </details>
+    </article>
+    
+    <article class="repo-card">
+      <div class="repo-header">
+        <h3><a href="https://github.com/Ya-MiC/ymzz_vnpy" target="_blank">ymzz_vnpy</a></h3>
+        <div class="badges"><span class="badge fork">🍴 Fork</span></div>
+      </div>
+      <p class="repo-desc">ymzz_vnpy_源於vnpy基于Python的开源量化交易平台开发框架</p>
+      <div class="repo-meta"></div>
+      <details class="repo-details">
+        <summary>根目錄檔案：.gitignore, CHANGELOG.md, LICENSE, README.md, README_ENG.md, install.bat</summary>
+        <div class="readme-preview"># VeighNa - By Traders, For Traders, AI-Powered.
+
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img src =&quot;https://vnpy.oss-cn-shanghai.aliyuncs.com/veighna-logo.png&quot;/&gt;
+&lt;/p&gt;
+
+💬 Want to read this in **english** ? Go [**here**]...</div>
+      </details>
+    </article>
+    
+      </div>
+    </section>
+  </main>
+  <footer>
+    晏銘湛箴 · Ya-MiC GitHub Profile · 設計系統 v3.1 溫潤 · sans-serif 字體 · CSS Grid 統一柵欄 · 玻璃擬態動畫
+  </footer>
+</div>
+</body>
+</html>
