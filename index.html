@@ -279,6 +279,34 @@
     aside{{grid-row:3;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--line-1)}}
     .comparison-grid{{grid-template-columns:1fr}}
   }}
+
+  /* 品牌橫幅 —— 讓頁面不再像純文字 */
+  .brand-banner{{
+    grid-column:1/-1;
+    background:linear-gradient(135deg, var(--c-cloud-paper) 0%, var(--c-earth-oat) 100%);
+    border:1px solid var(--line-1);
+    border-radius:var(--sp-4);
+    padding:var(--sp-8) var(--sp-12);
+    margin-bottom:var(--sp-8);
+    box-shadow:var(--shadow-rest);
+  }}
+  .banner-inner{{
+    display:flex;align-items:center;gap:var(--sp-4);flex-wrap:wrap;
+  }}
+  .banner-emoji{{font-size:2.5rem}}
+  .banner-title{{font-size:1.75rem;font-weight:700;color:var(--ink-1);letter-spacing:-0.02em}}
+  .banner-sub{{font-size:var(--fs-secondary);color:var(--ink-2);margin-left:auto;white-space:nowrap}}
+
+  /* 讓卡片視覺更明顯，不會被誤為純文字 */
+  .repo-card{{
+    background:var(--surface-2);
+    border:1px solid var(--line-1);
+    border-left:4px solid var(--c-cloud-sky);
+    box-shadow:var(--shadow-rest);
+  }}
+  .repo-card:hover{{border-left-color:var(--c-earth-cocoa);box-shadow:var(--shadow-float)}}
+  .repo-header h3 a{{font-size:1.15rem}}
+
 </style>
 </head>
 <body>
@@ -304,7 +332,16 @@
       <li>自有：<b>59</b> · Fork：<b>37</b></li>
     </ul>
   </aside>
-  <main>
+  
+  <div class="brand-banner">
+    <div class="banner-inner">
+      <span class="banner-emoji">🐙</span>
+      <span class="banner-title">晏銘湛箴 · Ya-MiC</span>
+      <span class="banner-sub">品牌總入口 · 全部 96 個 GitHub 倉庫索引</span>
+    </div>
+  </div>
+
+<main>
     
 <section class="red-blue" id="red-blue">
   <h2>🔴🔵 紅藍對抗：舊 README 錯誤 vs 新 README 修正</h2>
