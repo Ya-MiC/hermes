@@ -5,9 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>晏銘湛箴 · Ya-MiC · 品牌總入口</title>
 <meta name="description" content="晏銘湛箴 (Ya-MiC) 品牌總入口 · 溫潤設計系統 v3.1 · 全部 96 個 GitHub 倉庫索引">
+<meta name="theme-color" content="#F8F6EF">
+<meta property="og:title" content="晏銘湛箴 · Ya-MiC · 品牌總入口">
+<meta property="og:description" content="溫潤設計系統 v3.1 · 全部 96 個 GitHub 倉庫索引 · 純雲端編輯，未 clone 到本地">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://ya-mic.github.io/hermes/">
 
 <style>
   :root{
+    /* 溫潤設計系統 v3.1 tokens — 雲箋／陶土 */
     --c-cloud-paper:#F8F6EF;
     --c-cloud-sky:#B9DDF1;
     --c-cloud-pink:#F4DDE7;
@@ -43,7 +49,12 @@
     --surface-3:var(--bg-3);
     --border-hairline:0.5px solid rgba(61,56,51,.28);
     --font-sans:"Noto Sans SC Variable","Noto Sans SC",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans TC","PingFang TC",sans-serif;
-    --fs-h1:56px;--fs-h2:32px;--fs-h3:20px;--fs-body:15px;--fs-secondary:13px;--fs-caption:12px;
+    --fs-h1:clamp(40px, 8vw, 56px);
+    --fs-h2:clamp(24px, 5vw, 32px);
+    --fs-h3:clamp(18px, 3.5vw, 20px);
+    --fs-body:clamp(14px, 2vw, 15px);
+    --fs-secondary:clamp(12px, 2vw, 13px);
+    --fs-caption:12px;
     --leading-body:1.8;
     font-variant-numeric:tabular-nums;
     --hit:48px;--gap-hit:8px;
@@ -55,6 +66,7 @@
     --sp-2:8px;--sp-4:16px;--sp-6:24px;--sp-8:32px;--sp-12:48px;--sp-16:64px;--sp-20:80px;--sp-24:96px;
     --radius-sm:8px;--radius-md:14px;--radius-lg:24px;--radius-pill:999px;
     --content-wide:1200px;
+    --line-length-max:68ch;
   }
   [data-theme="dark"]{
     --bg-0:#1F1B16;--bg-1:#2A241D;--bg-2:#352E25;--bg-3:#423A2F;
@@ -64,12 +76,15 @@
     --border-hairline:0.5px solid rgba(230,225,213,.28);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{
+    scroll-behavior:smooth;
+    font-size:100%;
+    line-height:var(--leading-body);
+  }
   body{
     font-family:var(--font-sans);
     background:var(--bg-0);
     color:var(--ink-1);
-    line-height:var(--leading-body);
     min-height:100vh;
     font-variant-numeric:tabular-nums;
     -webkit-font-smoothing:antialiased;
@@ -78,7 +93,10 @@
   a{color:var(--accent);text-decoration:none}
   a:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:var(--radius-sm)}
   a:hover{color:var(--accent-warm);text-decoration:underline}
-  .skip-link{position:absolute;left:-9999px;top:var(--sp-4);background:var(--ink-1);color:#fff;padding:var(--sp-2) var(--sp-4);z-index:10000;border-radius:var(--radius-sm)}
+  .skip-link{
+    position:absolute;left:-9999px;top:var(--sp-4);background:var(--ink-1);color:#fff;
+    padding:var(--sp-2) var(--sp-4);z-index:10000;border-radius:var(--radius-sm);
+  }
   .skip-link:focus{left:var(--sp-4)}
   .brand-header{
     padding:var(--sp-24) var(--sp-12) var(--sp-20);
@@ -91,8 +109,8 @@
   .brand-wrap{max-width:var(--content-wide);margin:0 auto;display:flex;flex-direction:column;gap:var(--sp-4)}
   .brand-top{display:flex;align-items:center;gap:var(--sp-5)}
   .brand-emoji{font-size:4rem;filter:drop-shadow(0 12px 24px rgba(0,0,0,.08))}
-  .brand-title{font-size:var(--fs-h1);font-weight:800;letter-spacing:-0.03em;color:var(--ink-1);line-height:1.05;text-wrap:balance}
-  .brand-sub{font-size:var(--fs-body);color:var(--ink-2);max-width:72ch;font-weight:400;opacity:0.9}
+  .brand-title{font-size:var(--fs-h1);font-weight:800;letter-spacing:-0.03em;color:var(--ink-1);line-height:1.05;text-wrap:balance;max-width:var(--line-length-max)}
+  .brand-sub{font-size:var(--fs-body);color:var(--ink-2);max-width:var(--line-length-max);font-weight:400;opacity:0.9}
   .nav-wrap{max-width:var(--content-wide);margin:0 auto var(--sp-16);padding:0 var(--sp-12);display:flex;gap:var(--sp-2);flex-wrap:wrap}
   .nav-item{
     padding:var(--sp-2) var(--sp-6);border-radius:var(--radius-pill);font-size:var(--fs-secondary);font-weight:500;color:var(--ink-2);
@@ -113,7 +131,7 @@
     border-radius:var(--radius-lg);padding:var(--sp-12) var(--sp-16);margin-bottom:var(--sp-24);box-shadow:var(--shadow-rest);
   }
   .rb-head{margin-bottom:var(--sp-10)}
-  .rb-head h2{font-size:var(--fs-h2);font-weight:700;color:var(--ink-1);display:flex;align-items:center;gap:var(--sp-3);text-wrap:balance}
+  .rb-head h2{font-size:var(--fs-h2);font-weight:700;color:var(--ink-1);display:flex;align-items:center;gap:var(--sp-3);text-wrap:balance;max-width:var(--line-length-max)}
   .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-10)}
   .col{padding:var(--sp-8);border-radius:var(--radius-md);border:var(--border-hairline)}
   .col.red{background:rgba(239,68,68,.04);border-left:5px solid #ef4444}
@@ -136,6 +154,7 @@
     border:var(--border-hairline);border-radius:var(--radius-md);padding:var(--sp-8);
     transition:transform var(--t-panel) var(--ease-ink),box-shadow var(--t-panel) var(--ease-ink),border-color var(--t-panel) var(--ease-ink);
     box-shadow:var(--shadow-rest);animation:cardIn var(--t-page) var(--ease-ink) both;display:flex;flex-direction:column;height:100%;
+    contain:content;
   }
   @keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   .repo-card:nth-child(2){animation-delay:40ms}
@@ -169,7 +188,7 @@
   .repo-card h3{font-size:var(--fs-h3);font-weight:700;margin-bottom:var(--sp-3)}
   .repo-card h3 a{color:var(--ink-1)}
   .repo-card h3 a:hover{color:var(--accent);text-decoration:none}
-  .card-desc{font-size:var(--fs-secondary);color:var(--ink-2);margin-bottom:var(--sp-4);line-height:1.65;flex:1}
+  .card-desc{font-size:var(--fs-secondary);color:var(--ink-2);margin-bottom:var(--sp-4);line-height:1.65;flex:1;max-width:var(--line-length-max)}
   .card-meta{display:flex;gap:var(--sp-3);flex-wrap:wrap;margin-bottom:var(--sp-5);margin-top:auto}
   .meta-chip{font-size:var(--fs-caption);padding:3px 10px;border-radius:12px;background:var(--c-earth-oat);color:var(--ink-1);font-weight:600}
   .card-details{font-size:var(--fs-caption);color:var(--ink-2)}
@@ -185,7 +204,7 @@
   .card-details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius-sm)}
   .card-details[open] summary{margin-bottom:var(--sp-3)}
   .readme-pre{margin-top:var(--sp-3);font-size:var(--fs-caption);color:var(--ink-2);font-style:italic;line-height:1.5;max-height:120px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
-  .count-badge{font-size:var(--fs-caption);color:var(--ink-3);margin-left:var(--sp-2)}
+  .count-badge{font-size:var(--fs-caption);color:var(--ink-3);margin-left:var(--sp-2);font-variant-numeric:tabular-nums}
   footer{padding:var(--sp-20) var(--sp-12) var(--sp-32);text-align:center;color:var(--ink-2);font-size:var(--fs-caption);border-top:var(--border-hairline)}
   .footer-line{margin-bottom:var(--sp-3)}
   .footer-brand{font-weight:600;color:var(--ink-1);font-size:var(--fs-secondary);margin-bottom:var(--sp-2)}
@@ -200,6 +219,8 @@
   }
   @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 </head>
 <body>
@@ -207,7 +228,7 @@
 <header class="brand-header">
   <div class="brand-wrap">
     <div class="brand-top">
-      <span class="brand-emoji">🐙</span>
+      <span class="brand-emoji" aria-hidden="true">🐙</span>
       <div>
         <div class="brand-title">晏銘湛箴 · Ya-MiC</div>
         <div class="brand-sub">品牌總入口 · 溫潤設計系統 v3.1 · 全部 96 個 GitHub 倉庫索引 · 純雲端編輯，未 clone 到本地</div>
@@ -224,10 +245,11 @@
   <button class="nav-item" onclick="filterCat(this, 'Fork 外部系')" aria-pressed="false">Fork 外部系</button>
 </nav>
 <div class="search-wrap">
-  <input type="search" id="repo-search" class="search-input" placeholder="搜尋倉庫名稱、描述或語言…" aria-label="搜尋倉庫">
+  <input type="search" id="repo-search" class="search-input" placeholder="搜尋倉庫名稱、描述或語言…" aria-label="搜尋倉庫" aria-controls="content">
   <div class="search-hint">💡 支援模糊搜尋，例如「zhanzhen」、「Pages」、「Python」</div>
+  <span id="search-count" class="count-badge" aria-live="polite"></span>
 </div>
-<div class="shell" id="content">
+<main class="shell" id="content">
   <div class="red-blue">
     <div class="rb-head"><h2>🔴🔵 紅藍對抗 · 舊 README 錯誤 vs 新 README 修正</h2></div>
     <div class="comparison-grid">
@@ -2283,88 +2305,81 @@ A multimod…</div>
     </article>
     </div>
     </section>
-  </div>
+</main>
+<footer>
+  <div class="footer-brand">晏銘湛箴 · Ya-MiC GitHub Profile</div>
+  <div class="footer-line">溫潤設計系統 v3.1 · sans-serif 字體 · CSS Grid 統一柵欄 · 玻璃擬態動畫 · WCAG 可讀性</div>
+  <div>🐙 章鱼 红金山图标 湛箴不叫 Oz</div>
+</footer>
+<script>
+  (function(){
+    var cards = document.querySelectorAll('.repo-card');
+    var searchInput = document.getElementById('repo-search');
+    var countEl = document.getElementById('search-count');
+    var total = cards.length;
 
-  <footer>
-    <div class="footer-brand">晏銘湛箴 · Ya-MiC GitHub Profile</div>
-    <div class="footer-line">溫潤設計系統 v3.1 · sans-serif 字體 · CSS Grid 統一柵欄 · 玻璃擬態動畫 · WCAG 可讀性</div>
-    <div>🐙 章鱼 红金山图标 湛箴不叫 Oz</div>
-  </footer>
+    function renderCount(shown){
+      countEl.textContent = '顯示 ' + shown + ' / ' + total + ' 個倉庫';
+    }
 
-  <script>
-    (function(){
-      var cards = document.querySelectorAll('.repo-card');
-      var searchInput = document.getElementById('repo-search');
-      var countEl = null;
-
-      function renderCount(shown){
-        var total = cards.length;
-        if(!countEl){
-          countEl = document.createElement('div');
-          countEl.className = 'count-badge';
-          searchInput.parentNode.insertBefore(countEl, searchInput.nextSibling);
-        }
-        countEl.textContent = '顯示 ' + shown + ' / ' + total + ' 個倉庫';
-      }
-
-      function filterByText(text){
-        var shown = 0;
-        text = text.toLowerCase();
-        cards.forEach(function(card){
-          var name = card.getAttribute('data-name') || '';
-          var desc = card.querySelector('.card-desc') ? card.querySelector('.card-desc').textContent : '';
-          var lang = card.querySelector('.meta-chip') ? card.querySelector('.meta-chip').textContent : '';
-          var match = (!text) ||
-            name.toLowerCase().indexOf(text) > -1 ||
-            desc.toLowerCase().indexOf(text) > -1 ||
-            lang.toLowerCase().indexOf(text) > -1;
-          card.style.display = match ? '' : 'none';
-          if(match) shown++;
-        });
-        renderCount(shown);
-      }
-
-      searchInput.addEventListener('input', function(e){
-        filterByText(e.target.value);
+    function filterByText(text){
+      var shown = 0;
+      text = text.toLowerCase();
+      cards.forEach(function(card){
+        var name = card.getAttribute('data-name') || '';
+        var desc = card.querySelector('.card-desc') ? card.querySelector('.card-desc').textContent : '';
+        var lang = card.querySelector('.meta-chip') ? card.querySelector('.meta-chip').textContent : '';
+        var match = (!text) ||
+          name.toLowerCase().indexOf(text) > -1 ||
+          desc.toLowerCase().indexOf(text) > -1 ||
+          lang.toLowerCase().indexOf(text) > -1;
+        card.style.display = match ? '' : 'none';
+        if(match) shown++;
       });
+      renderCount(shown);
+    }
 
-      window.filterCat = function(btn, cat){
-        document.querySelectorAll('.nav-item').forEach(function(b){
-          b.classList.remove('active');
-          b.setAttribute('aria-pressed','false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed','true');
+    searchInput.addEventListener('input', function(e){
+      filterByText(e.target.value);
+    });
 
-        var shown = 0;
+    window.filterCat = function(btn, cat){
+      document.querySelectorAll('.nav-item').forEach(function(b){
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed','false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed','true');
+
+      var shown = 0;
+      cards.forEach(function(card){
+        if(cat === '全部' || card.getAttribute('data-cat') === cat){
+          card.style.display = '';
+          shown++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      var text = searchInput.value.trim();
+      if(text){
         cards.forEach(function(card){
-          if(cat === '全部' || card.getAttribute('data-cat') === cat){
-            card.style.display = '';
-            shown++;
-          } else {
-            card.style.display = 'none';
+          if(card.style.display !== 'none'){
+            var name = card.getAttribute('data-name') || '';
+            var desc = card.querySelector('.card-desc') ? card.querySelector('.card-desc').textContent : '';
+            var lang = card.querySelector('.meta-chip') ? card.querySelector('.meta-chip').textContent : '';
+            var match = name.toLowerCase().indexOf(text) > -1 ||
+              desc.toLowerCase().indexOf(text) > -1 ||
+              lang.toLowerCase().indexOf(text) > -1;
+            if(!match) card.style.display = 'none';
+            else shown++;
           }
         });
-        var text = searchInput.value.trim();
-        if(text){
-          cards.forEach(function(card){
-            if(card.style.display !== 'none'){
-              var name = card.getAttribute('data-name') || '';
-              var desc = card.querySelector('.card-desc') ? card.querySelector('.card-desc').textContent : '';
-              var lang = card.querySelector('.meta-chip') ? card.querySelector('.meta-chip').textContent : '';
-              var match = name.toLowerCase().indexOf(text) > -1 ||
-                desc.toLowerCase().indexOf(text) > -1 ||
-                lang.toLowerCase().indexOf(text) > -1;
-              if(!match) card.style.display = 'none';
-              else shown++;
-            }
-          });
-        }
-        renderCount(shown);
-      };
+      }
+      renderCount(shown);
+    };
 
-      renderCount(cards.length);
-    })();
-  </script>
+    renderCount(cards.length);
+  })();
+</script>
 </body>
 </html>
